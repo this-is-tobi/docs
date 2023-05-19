@@ -1,0 +1,19 @@
+name: Build new documentation version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        images: ${{ fromJSON(needs.matrix.outputs.build-matrix) }}
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v3
+      - name: Synchronize docs
+        run: npm run sync
+      - name: Get short git sha
+        run: npm run build

@@ -1,12 +1,13 @@
 {
-  "name": "portfolio",
+  "name": "docs",
   "version": "1.0.0",
-  "description": "A simple automated documentation generator",
-  "main": "index.js",
+  "description": "A simple automated documentation builder with vitepress",
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev src",
     "build": "vitepress build src",
+    "dev": "vitepress dev src --port 8080",
+    "docker:build": "docker build --tag robots/docs --target prod .",
+    "docker:run": "docker run --publish 8080:8080 --rm robots/docs",
     "preview": "vitepress preview src",
     "sync": "./scripts/sync.sh"
   },

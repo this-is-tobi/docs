@@ -1,0 +1,25 @@
+imagePullPolicy: Always
+
+imageCredentials:
+  registry: 
+  username: 
+  password: 
+  email: 
+
+client:
+  container:
+    image: docker.io/org/image:latest
+    port: 8080
+  service:
+    port: 80
+    hostname: client
+  ingress:
+    enabled: true
+    hosts:
+      - docs.domain.com
+    tls:
+      enabled: true
+      # optional secret used for ingress.spec.tls.secretName
+      secretName:
+    annotations: {}
+    labels: {}

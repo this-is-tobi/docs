@@ -3,7 +3,7 @@ import sidebar from '../projects/sidebar.json' assert { type: 'json'}
 export default {
   lang: 'en-US',
   title: 'Home',
-  description: 'Simple docs generator',
+  description: 'Tobi\'s projects documentation',
   srcDir: 'projects',
   cleanUrls: true,
   themeConfig: {
@@ -13,5 +13,4 @@ export default {
       { icon: 'github', link: 'https://github.com/this-is-tobi' }
     ]
   },
-  
 }

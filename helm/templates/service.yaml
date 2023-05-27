@@ -10,7 +10,7 @@ spec:
   selector:
     app: {{ $.Release.Name }}-{{ $container }}
   ports:
-  - port: {{ .service.port }}
-    targetPort: {{ .container.port }}
+    - port: {{ .service.port }}
+      targetPort: {{ .container.port }}
 {{ end -}}
 {{ end -}}

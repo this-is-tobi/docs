@@ -14,17 +14,17 @@ spec:
         app: {{ .Release.Name }}-client
     spec:
       imagePullSecrets:
-      - name: {{ .Release.Name }}-pullsecret
+        - name: {{ .Release.Name }}-pullsecret
       containers:
-      - name: {{ .Release.Name }}-client
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
-        image: {{ .Values.client.container.image }}
-        ports:
-        - containerPort: {{ .Values.client.container.port }}
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - name: {{ .Release.Name }}-client
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.client.container.image }}
+          ports:
+            - containerPort: {{ .Values.client.container.port }}
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

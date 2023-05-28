@@ -31,22 +31,26 @@ Take a look at the [project sources]($1).
 printf "\n\n${red}${i}.${no_color} Prepare script\n"
 i=$(($i + 1))
 
-rm -rf src/projects
-mkdir tmp && touch tmp/sidebar.json && echo "[]" > tmp/sidebar.json
-mkdir src/projects && cp src/index.md src/projects/index.md
-wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/scripts/clone-subdir.sh" -O "tmp/clone-subdir.sh"
-chmod +x tmp/clone-subdir.sh
+# Prepare environment
+rm -rf src/projects \
+  && mkdir tmp src/projects \
+  && touch tmp/sidebar.json && echo "[]" > tmp/sidebar.json \
+  && cp src/index.md src/projects/index.md
+
+# Download utility script to clone subdir
+wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/scripts/clone-subdir.sh" -O "tmp/clone-subdir.sh" \
+  && chmod +x tmp/clone-subdir.sh
 
 # Parse projects
 for REPO in ${REPOS[@]}; do
-  # Create tmp and src folders
-  mkdir -p tmp/projects/$REPO src/projects/$REPO
-
-
   # Download project doc files (readme or docs folder)
-  printf "\n\n${red}${i}.${no_color} Download doc files for project '$REPO'\n"
+  printf "\n\n${red}${i}.${no_color} Processing project '$REPO'\n"
   i=$(($i + 1))
 
+  # Create tmp and src folders for processing project
+  mkdir -p tmp/projects/$REPO src/projects/$REPO
+
+  # Check if repository have a 'docs' folder and download it instead of readme if there is
   DOCS_FOLDER_STATUS="$(curl --write-out '%{http_code}' --silent --output /dev/null https://github.com/$USER/$REPO/tree/$BRANCH/docs)"
   if [ "$DOCS_FOLDER_STATUS" != '404' ]; then
     tmp/clone-subdir.sh \
@@ -62,38 +66,35 @@ for REPO in ${REPOS[@]}; do
       > "src/projects/$REPO/readme.md"
   fi
 
-
-  # Add sources section and update links
-  printf "\n\n${red}${i}.${no_color} Add sources section for project '$REPO'\n"
-  i=$(($i + 1))
-
+  # Add sources page and update links
   addSourcesPage "https://github.com/$USER/$REPO" "src/projects/$REPO/sources.md"
   DESCRIPTION="$(curl -s https://api.github.com/repos/$USER/$REPO | jq -r '.description // empty')"
   FORMATED_REPO="$(echo $REPO | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1')"
 
-
-  # Build project sidebar
-  printf "\n\n${red}${i}.${no_color} Build sidebar config for project '$REPO'\n"
-  i=$(($i + 1))
-
+  # Add root page to project sidebar
   touch tmp/projects/$REPO/config.json && echo "[]" > tmp/projects/$REPO/config.json
+
   if [ "$DOCS_FOLDER_STATUS" != '404' ]; then
     LINK=/introduction
   else
     LINK=/readme
+    jq \
+      --arg r "$REPO" \
+      --arg l "$LINK" \
+      '. += [{ 
+        text: "Introduction", 
+        link: ("/" + $r + $l) 
+      }]' tmp/projects/$REPO/config.json > src/projects/$REPO/config.json
+    cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
   fi
-  jq \
-    --arg r "$REPO" \
-    --arg l "$LINK" \
-    '. += [{ 
-      text: "Introduction", 
-      link: ("/" + $r + $l) 
-    }]' tmp/projects/$REPO/config.json > src/projects/$REPO/config.json
-  cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
 
+  # Add pages to project sidebar
   for FILE in $(find src/projects/$REPO -type f -name "*.md" ! -name "readme.md" ! -name "sources.md" | sort --ignore-case); do
-    FILENAME="$(basename ${FILE%.*})"
-    FORMATED_FILE="$(echo "$FILENAME" | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1')"
+    UPDATED_FILE="$(dirname $FILE)/${FILE#*-}"
+    cat $FILE | sed -E "s|(\[.*\])\(\.\.\/(.*)\)(.*)|\1\(https://github.com/$USER/$REPO/tree/$BRANCH/\2\)\3|g" > $UPDATED_FILE
+    rm $FILE
+    FILENAME="$(basename ${UPDATED_FILE%.*})"
+    FORMATED_FILE="$(echo "$FILENAME" | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' | tr '-' ' ')"
     jq \
       --arg f "$FORMATED_FILE" \
       --arg n "$FILENAME" \
@@ -105,6 +106,7 @@ for REPO in ${REPOS[@]}; do
     cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
   done
 
+  # Add sources to project sidebar
   jq \
     --arg r "$REPO" \
     '. += [{ 
@@ -113,14 +115,16 @@ for REPO in ${REPOS[@]}; do
     }]' tmp/projects/$REPO/config.json > src/projects/$REPO/config.json
   cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
 
+  # Add project to home page
   yq \
     -i \
     ".features += {
       \"title\": \"$FORMATED_REPO\", 
       \"details\": \"$DESCRIPTION\", 
-      \"link\": \"/$REPO/readme\"
+      \"link\": \"/$REPO$LINK\"
     }" src/projects/index.md
 
+  # Add project sidebar to global sidebar
   jq \
     --arg f "$(cat src/projects/$REPO/config.json)" \
     --arg r "$REPO" \

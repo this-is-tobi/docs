@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'Home',
   description: 'Tobi\'s projects documentation',
   srcDir: './projects',
-  cleanUrls: true,
+  cleanUrls: false,
   themeConfig: {
     outline: [2, 3],
     sidebar,

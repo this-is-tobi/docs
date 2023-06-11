@@ -9,7 +9,8 @@ env:
   REGISTRY_HOST: ${{ vars.REGISTRY_HOST }}
   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-  REGISTRY_NAMESPACE: ${{ vars.REGISTRY_NAMESPACE }}
+  REGISTRY_PROJECT: ${{ vars.REGISTRY_PROJECT }}
+  REGISTRY_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY }}
   PLATFORM: linux/amd64,linux/arm64
 
 jobs:
@@ -37,7 +38,18 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAMESPACE }}:latest
+          tags: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_PROJECT }}/${{ env.REGISTRY_REPOSITORY }}:latest
           target: prod
           platforms: ${{ env.PLATFORM }}
           push: true
+      - name: Delete previous docker image
+        run: |
+          PREVIOUS_ARTIFACT=$(curl -X GET \
+            -H 'accept: application/json' \
+            -H 'bearer: ${{ env.REGISTRY_PASSWORD }}' \
+            "https://${{ env.REGISTRY_HOST }}/api/v2.0/projects/${{ env.REGISTRY_PROJECT }}/repositories/${{ env.REGISTRY_REPOSITORY }}/artifacts?sort=push_time" \
+            | jq -r '.[0].digest')
+          curl -X DELETE \
+            -H 'accept: application/json' \
+            -H 'bearer: ${{ env.REGISTRY_PASSWORD }}' \
+            "https://${{ env.REGISTRY_HOST }}/api/v2.0/projects/${{ env.REGISTRY_PROJECT }}/repositories/${{ env.REGISTRY_REPOSITORY }}/artifacts/$PREVIOUS_ARTIFACT"

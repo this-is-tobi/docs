@@ -1,6 +1,6 @@
 # Doc generator :robot:
 
-This project aims to automate the construction of documents from a list of repositories.
+This project aims to automate the construction of documentation website based on a list of repositories.
 
 ## Explanation
 

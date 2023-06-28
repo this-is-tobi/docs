@@ -12,3 +12,5 @@ After downloading all project documentation files, it will build a static websit
 ## Automation
 
 The script runs in a [workflow](./.github/workflows/sync.yml) every week (Sunday - 03:00 am) or can be triggered manually from the Github user interface.
+
+> After pushing the new image, the previous one is deleted to save space.

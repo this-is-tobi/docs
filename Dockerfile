@@ -1,5 +1,5 @@
 # Base stage
-FROM docker.io/node:18.16.0-bullseye-slim AS base
+FROM docker.io/node:18.16.1-bullseye-slim AS base
 
 WORKDIR /app
 RUN npm install --location=global pnpm

@@ -1,5 +1,3 @@
-imagePullPolicy: Always
-
 imageCredentials:
   registry: 
   username: 
@@ -10,6 +8,7 @@ client:
   container:
     image: docker.io/org/image:latest
     port: 8080
+    imagePullPolicy: Always
   service:
     port: 80
     hostname: client

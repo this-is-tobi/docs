@@ -1,30 +1,36 @@
+{{ $containers := list "client" }}
+{{- range $container := $containers -}}
+{{- with index $.Values $container }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Release.Name }}-client
-  name: {{ .Release.Name }}-client
+    app: {{ $.Release.Name }}-{{ $container }}
+  name: {{ $.Release.Name }}-{{ $container }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-client
+      app: {{ $.Release.Name }}-{{ $container }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-client
+        app: {{ $.Release.Name }}-{{ $container }}
     spec:
       imagePullSecrets:
-        - name: {{ .Release.Name }}-pullsecret
+      - name: {{ $.Release.Name }}-pullsecret
       containers:
-        - name: {{ .Release.Name }}-client
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
-          image: {{ .Values.client.container.image }}
-          ports:
-            - containerPort: {{ .Values.client.container.port }}
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+      - name: {{ $.Release.Name }}-{{ $container }}
+        imagePullPolicy: {{ .container.imagePullPolicy }}
+        image: {{ .container.image }}
+        ports:
+          - containerPort: {{ .container.port }}
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "128m"
+          limits:
+            memory: "128Mi"
+            cpu: "256m"
+{{ end -}}
+{{ end -}}

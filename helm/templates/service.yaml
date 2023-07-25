@@ -1,5 +1,5 @@
 {{ $containers := list "client" }}
-{{- range $container := $containers -}}
+{{- range $container := $containers }}
 {{- with index $.Values $container }}
 ---
 apiVersion: v1
@@ -12,5 +12,5 @@ spec:
   ports:
   - port: {{ .service.port }}
     targetPort: {{ .container.port }}
-{{ end -}}
-{{ end -}}
+{{- end }}
+{{- end }}

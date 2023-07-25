@@ -1,5 +1,5 @@
 {{ $containers := list "client" }}
-{{- range $container := $containers -}}
+{{- range $container := $containers }}
 {{- with index $.Values $container }}
 ---
 apiVersion: apps/v1
@@ -25,12 +25,23 @@ spec:
         image: {{ .container.image }}
         ports:
           - containerPort: {{ .container.port }}
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "128m"
-          limits:
-            memory: "128Mi"
-            cpu: "256m"
-{{ end -}}
-{{ end -}}
+        resources: {{- toYaml .container.resources | nindent 10 }}
+        volumeMounts:
+        {{- range $volumeMount := .container.extraVolumeMounts }}
+        - name: {{ $volumeMount.name }}
+          mountPath: {{ $volumeMount.mountPath }}
+        {{- end }}
+      volumes:
+      {{- range $volume := .container.extraVolumes }}
+      - name: {{ $volume.name }}
+        {{- if eq $volume.type "hostPath" }}
+        hostPath:
+          path: {{ $volume.path }}
+        {{- end }}
+        {{- if eq $volume.type "configMap" }}
+        configMap:
+          name: {{ $volume.name }}
+        {{- end }}
+      {{- end }}
+{{- end }}
+{{- end }}

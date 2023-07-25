@@ -9,6 +9,15 @@ client:
     image: docker.io/org/image:latest
     port: 8080
     imagePullPolicy: Always
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "128m"
+      limits:
+        memory: "128Mi"
+        cpu: "256m"
+    extraVolumes: []
+    extraVolumeMounts: []
   service:
     port: 80
     hostname: client
@@ -18,7 +27,6 @@ client:
       - docs.domain.com
     tls:
       enabled: true
-      # optional secret used for ingress.spec.tls.secretName
-      secretName:
+      secretName: ""
     annotations: {}
     labels: {}

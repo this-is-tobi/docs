@@ -1,8 +1,8 @@
 {{ $containers := list "client" }}
-{{- range $container := $containers -}}
+{{- range $container := $containers }}
 {{- with index $.Values $container }}
-{{- if .ingress.enabled -}}
-{{- $servicePort := .service.port -}}
+{{- if .ingress.enabled }}
+{{- $servicePort := .service.port }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -12,16 +12,16 @@ metadata:
     app: 
     release: "{{ $.Release.Name }}"
   annotations:
-{{- range $key, $value := .ingress.annotations }}
+  {{- range $key, $value := .ingress.annotations }}
     {{ $key }}: {{ $value | quote }}
-{{- end }}
+  {{- end }}
   labels:
-{{- range $key, $value := .ingress.labels }}
+  {{- range $key, $value := .ingress.labels }}
     {{ $key }}: {{ $value | quote }}
-{{- end }}
+  {{- end }}
 spec:
   rules:
-{{- range $host := .ingress.hosts }}
+  {{- range $host := .ingress.hosts }}
   - host: {{ $host }}
     http:
       paths:
@@ -32,19 +32,19 @@ spec:
             name: {{ $.Release.Name }}-{{ $container }}
             port:
               number: {{ $servicePort }}
-{{- end -}}
-{{- if .ingress.tls.enabled }}
+  {{- end }}
+  {{- if .ingress.tls.enabled }}
   tls:
   - hosts:
-{{- range $host := .ingress.hosts }}
+  {{- range $host := .ingress.hosts }}
     - {{ $host }}
-{{- end }}
-{{- if .ingress.tls.secretName }}
+  {{- end }}
+    {{- if .ingress.tls.secretName }}
     secretName: {{ .ingress.tls.secretName }}
-{{- else }}
+    {{- else }}
     secretName: {{ $.Release.Name }}-{{ $container }}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

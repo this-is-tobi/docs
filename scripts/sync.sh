@@ -38,7 +38,7 @@ rm -rf src/projects \
   && cp src/index.md src/projects/index.md
 
 # Download utility script to clone subdir
-wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/scripts/clone-subdir.sh" -O "tmp/clone-subdir.sh" \
+wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/shell/clone-subdir.sh" -O "tmp/clone-subdir.sh" \
   && chmod +x tmp/clone-subdir.sh
 
 # Parse projects

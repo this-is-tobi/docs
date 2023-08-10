@@ -17,6 +17,7 @@ REPOS=(
 )
 BRANCH=main
 
+
 # Add sources infos into readme file
 addSourcesPage () {
   printf "
@@ -116,13 +117,14 @@ for REPO in ${REPOS[@]}; do
   cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
 
   # Add project to home page
-  yq \
-    -i \
-    ".features += {
-      \"title\": \"$FORMATED_REPO\", 
-      \"details\": \"$DESCRIPTION\", 
-      \"link\": \"/$REPO$LINK\"
-    }" src/projects/index.md
+  cat src/projects/index.md \
+    | docker run -i --rm -e FORMATED_REPO="$FORMATED_REPO" -e DESCRIPTION="$DESCRIPTION" -e REPO="$REPO" -e LINK="$LINK" mikefarah/yq \
+      ".features += {
+        \"title\": \"$FORMATED_REPO\", 
+        \"details\": \"$DESCRIPTION\", 
+        \"link\": \"/$REPO$LINK\"
+      }" > tmp/projects/index.md \
+    && cp tmp/projects/index.md src/projects/index.md
 
   # Add project sidebar to global sidebar
   jq \

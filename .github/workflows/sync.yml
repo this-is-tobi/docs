@@ -46,14 +46,3 @@ jobs:
           target: prod
           platforms: ${{ env.PLATFORM }}
           push: true
-      - name: Delete previous docker image
-        run: |
-          PREVIOUS_ARTIFACT=$(curl -X GET \
-            -H 'accept: application/json' \
-            -H 'bearer: ${{ env.REGISTRY_PASSWORD }}' \
-            "https://${{ env.REGISTRY_HOST }}/api/v2.0/projects/${{ env.REGISTRY_PROJECT }}/repositories/${{ env.REGISTRY_REPOSITORY }}/artifacts?sort=push_time" \
-            | jq -r '.[0].digest')
-          curl -X DELETE \
-            -H 'accept: application/json' \
-            -H 'bearer: ${{ env.REGISTRY_PASSWORD }}' \
-            "https://${{ env.REGISTRY_HOST }}/api/v2.0/projects/${{ env.REGISTRY_PROJECT }}/repositories/${{ env.REGISTRY_REPOSITORY }}/artifacts/$PREVIOUS_ARTIFACT"

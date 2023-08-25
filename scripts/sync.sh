@@ -70,7 +70,7 @@ for REPO in ${REPOS[@]}; do
   # Add sources page and update links
   addSourcesPage "https://github.com/$USER/$REPO" "src/projects/$REPO/sources.md"
   DESCRIPTION="$(curl -s https://api.github.com/repos/$USER/$REPO | jq -r '.description // empty')"
-  FORMATED_REPO="$(echo $REPO | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1')"
+  FORMATED_REPO="$(echo $REPO | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1'| sed 's/-/\ /g')"
 
   # Add root page to project sidebar
   touch tmp/projects/$REPO/config.json && echo "[]" > tmp/projects/$REPO/config.json
@@ -117,14 +117,12 @@ for REPO in ${REPOS[@]}; do
   cp src/projects/$REPO/config.json tmp/projects/$REPO/config.json
 
   # Add project to home page
-  cat src/projects/index.md \
-    | docker run -i --rm -e FORMATED_REPO="$FORMATED_REPO" -e DESCRIPTION="$DESCRIPTION" -e REPO="$REPO" -e LINK="$LINK" mikefarah/yq \
-      ".features += {
-        \"title\": \"$FORMATED_REPO\", 
-        \"details\": \"$DESCRIPTION\", 
-        \"link\": \"/$REPO$LINK\"
-      }" > tmp/projects/index.md \
-    && cp tmp/projects/index.md src/projects/index.md
+  yq -i \
+    ".features += {
+      \"title\": \"$FORMATED_REPO\", 
+      \"details\": \"$DESCRIPTION\", 
+      \"link\": \"/$REPO$LINK\"
+    }" src/projects/index.md
 
   # Add project sidebar to global sidebar
   jq \

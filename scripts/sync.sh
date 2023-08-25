@@ -12,7 +12,9 @@ USER=this-is-tobi
 REPOS=(
   docs
   dotfiles
+  gitmojidex
   homelab
+  template-monorepo-ts
   tools
 )
 BRANCH=main

@@ -13,4 +13,27 @@ After downloading all project documentation files, it will build a static websit
 
 The script runs in a [workflow](./.github/workflows/sync.yml) every week (Sunday - 03:00 am) or can be triggered manually from the Github user interface.
 
-> After pushing the new image, the previous one is deleted to save space.
+## Prerequisites
+
+To run the shell script that build the static website, install :
+- [yq](https://github.com/mikefarah/yq) *- yaml parser.*
+
+To run the application in development mode, install :
+- [nodejs](https://nodejs.org/) *- javascript runtime.*
+- [pnpm](https://pnpm.io/) *- powerful, space efficient node package manager.*
+
+## Development
+
+1. Change user and repositories in the [shell script](./scripts/sync.sh).
+2. Run the shell script. 
+    ```sh
+    sh ./scripts/sync.sh
+    ```
+4. Install project nodejs dependencies.
+    ```sh
+    pnpm Install
+    ```
+5. Launch dev mode.
+    ```sh
+    pnpm run dev
+    ```

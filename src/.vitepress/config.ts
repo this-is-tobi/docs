@@ -23,7 +23,29 @@ export default defineConfig({
     outline: [2, 3],
     sidebar,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/this-is-tobi' }
-    ]
-  },
+      { icon: 'github', link: 'https://github.com/this-is-tobi' },
+    ],
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: 'Search...',
+            buttonAriaLabel: 'Search'
+          },
+          modal: {
+            backButtonTitle: 'erase search',
+            displayDetails: 'show details',
+            noResultsText: 'No results for : ',
+            resetButtonTitle: 'cancel search',
+            footer: {
+              selectText: 'go to',
+              navigateText: 'navigate in results',
+              closeText: 'close'
+            }
+          }
+        },
+      }
+    },
+  }
 })

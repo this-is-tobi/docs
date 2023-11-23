@@ -13,7 +13,7 @@
   },
   "author": "this-is-tobi",
   "devDependencies": {
-    "vitepress": "1.0.0-rc.26"
+    "vitepress": "1.0.0-rc.30"
   },
   "volta": {
     "node": "20.9.0"

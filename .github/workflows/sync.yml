@@ -6,17 +6,18 @@ on:
     - cron: '0 3 * * 0'
 
 env:
-  REGISTRY_HOST: ${{ vars.REGISTRY_HOST }}
-  REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-  REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-  REGISTRY_PROJECT: ${{ vars.REGISTRY_PROJECT }}
-  REGISTRY_REPOSITORY: ${{ vars.REGISTRY_REPOSITORY }}
+  REGISTRY_HOST: ghcr.io
+  REGISTRY_USERNAME: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  REGISTRY_NAMESPACE: ${{ github.repository }}
   PLATFORM: linux/amd64,linux/arm64
 
 jobs:
   build:
     name: Build application
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checks-out repository
         uses: actions/checkout@v4
@@ -48,7 +49,15 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          tags: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_PROJECT }}/${{ env.REGISTRY_REPOSITORY }}:latest
+          tags: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAMESPACE }}:latest
           target: prod
           platforms: ${{ env.PLATFORM }}
           push: true
+
+      - name: Clean up old images
+        if: ${{ success() }}
+        run: |
+          ./scripts/purge-images.sh \
+            -i "this-is-tobi/docs" \
+            -g "${{ secrets.GITHUB_TOKEN }}" \
+            -u "this-is-tobi"

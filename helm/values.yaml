@@ -1,32 +1,65 @@
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
 imageCredentials:
-  registry: 
-  username: 
-  password: 
-  email: 
+  registry: ""
+  username: ""
+  password: ""
+  email: ""
 
-client:
+docs:
+  replicaCount: 1
+  image:
+    repository: ghcr.io/this-is-tobi/docs
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  podAnnotations: {}
+  podSecurityContext: {}
+    # fsGroup: 2000
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
   container:
-    image: docker.io/org/image:latest
     port: 8080
-    imagePullPolicy: Always
-    resources:
-      requests:
-        memory: "64Mi"
-        cpu: "128m"
-      limits:
-        memory: "128Mi"
-        cpu: "256m"
-    extraVolumes: []
-    extraVolumeMounts: []
+    env: {}
+    secrets: {}
   service:
+    type: ClusterIP
     port: 80
-    hostname: client
   ingress:
-    enabled: true
-    hosts:
-      - docs.domain.com
-    tls:
-      enabled: true
-      secretName: ""
+    enabled: false
+    className: ""
     annotations: {}
-    labels: {}
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}

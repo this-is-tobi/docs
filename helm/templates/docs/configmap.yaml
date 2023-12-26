@@ -1,0 +1,8 @@
+{{- if .Values.docs.container.env -}}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "this-is-tobi-docs.docs.fullname" . }}
+  labels: {{- include "this-is-tobi-docs.docs.labels" . | nindent 4 }}
+data: {{- include "this-is-tobi-docs.containerEnv" .Values.docs.container | indent 2 }}
+{{- end -}}

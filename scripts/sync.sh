@@ -129,7 +129,7 @@ for REPO in ${REPOS[@]}; do
   # Add project sidebar to global sidebar
   jq \
     --arg f "$(cat src/projects/$REPO/config.json)" \
-    --arg r "$REPO" \
+    --arg r "$FORMATED_REPO" \
     '. += [{
       text: $r,
       collapsed: true,

@@ -14,6 +14,7 @@ REPOS=(
   dotfiles
   gitmojidex
   homelab
+  multiarch-mirror
   template-monorepo-ts
   tools
 )

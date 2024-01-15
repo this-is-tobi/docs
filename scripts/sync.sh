@@ -66,7 +66,7 @@ for REPO in ${REPOS[@]}; do
   else
     wget -q "https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/README.md" -O "tmp/projects/$REPO/readme.md"
     cat "tmp/projects/$REPO/readme.md" \
-      | sed -E "s|(\[.*\])\(\.\/(.*)\)(.*)|\1\(https://github.com/$USER/$REPO/tree/$BRANCH/\2\)\3|g" \
+      | sed -E "s|\[([^]]+)\]\((\./[^)]+)\)|[\1](https://github.com/$USER/$REPO/tree/$BRANCH/\2)|g" \
       > "src/projects/$REPO/readme.md"
   fi
 
@@ -95,7 +95,7 @@ for REPO in ${REPOS[@]}; do
   # Add pages to project sidebar
   for FILE in $(find src/projects/$REPO -type f -name "*.md" ! -name "readme.md" ! -name "sources.md" | sort --ignore-case); do
     UPDATED_FILE="$(dirname $FILE)/${FILE#*-}"
-    cat $FILE | sed -E "s|(\[.*\])\(\.\.\/(.*)\)(.*)|\1\(https://github.com/$USER/$REPO/tree/$BRANCH/\2\)\3|g" > $UPDATED_FILE
+    cat $FILE | sed -E "s|\[([^]]+)\]\(\.\./([^)]+)\)|[\1](https://github.com/$USER/$REPO/tree/$BRANCH/\2)|g" > $UPDATED_FILE
     rm $FILE
     FILENAME="$(basename ${UPDATED_FILE%.*})"
     FORMATED_FILE="$(echo "$FILENAME" | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' | tr '-' ' ')"

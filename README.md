@@ -16,6 +16,7 @@ The script runs in a [workflow](./.github/workflows/sync.yml) every week (Sunday
 ## Prerequisites
 
 To run the shell script that build the static website, install :
+- [jq](https://jqlang.github.io/jq/) *- json parser.*
 - [yq](https://github.com/mikefarah/yq) *- yaml parser.*
 
 To run the application in development mode, install :

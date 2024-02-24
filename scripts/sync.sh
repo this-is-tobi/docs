@@ -39,7 +39,8 @@ i=$(($i + 1))
 rm -rf src/projects \
   && mkdir tmp src/projects \
   && touch tmp/sidebar.json && echo "[]" > tmp/sidebar.json \
-  && cp src/index.md src/projects/index.md
+  && cp src/index.md src/projects/index.md \
+  && cp src/about.md src/projects/about.md
 
 # Download utility script to clone subdir
 wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/shell/clone-subdir.sh" -O "tmp/clone-subdir.sh" \

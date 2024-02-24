@@ -15,7 +15,7 @@ export default defineConfig({
     ['link', { rel: "manifest", href: "/site.webmanifest"}],
   ],
   title: 'Home',
-  description: 'Tobi\'s projects documentation',
+  description: 'Tobi\'s documentation',
   srcDir: './projects',
   cleanUrls: false,
   ignoreDeadLinks: 'localhostLinks',
@@ -23,6 +23,9 @@ export default defineConfig({
     logo: '/android-chrome-512x512.png',
     outline: [2, 3],
     sidebar,
+    nav: [
+      { text: 'About', link: '/about' },
+    ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/this-is-tobi' },
     ],

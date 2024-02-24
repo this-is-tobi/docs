@@ -30,6 +30,7 @@ const members = [
 <style>
 .vp-doc .VPTeamMembers.medium.count-1 .container {
   margin: auto !important;
+  max-width: 650px !important;
 }
 </style>
 

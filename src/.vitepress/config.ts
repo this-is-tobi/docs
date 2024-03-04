@@ -17,7 +17,7 @@ export default defineConfig({
   title: 'Home',
   description: 'Tobi\'s documentation',
   srcDir: './projects',
-  cleanUrls: false,
+  cleanUrls: true,
   ignoreDeadLinks: 'localhostLinks',
   themeConfig: {
     logo: '/android-chrome-512x512.png',

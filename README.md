@@ -32,7 +32,7 @@ To run the application in development mode, install :
     ```
 4. Install project nodejs dependencies.
     ```sh
-    pnpm Install
+    pnpm install
     ```
 5. Launch dev mode.
     ```sh

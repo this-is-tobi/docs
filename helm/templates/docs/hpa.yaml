@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "this-is-tobi-docs.docs.fullname" . }}
+  name: {{ include "template.docs.fullname" . }}
   labels:
-    {{- include "this-is-tobi-docs.docs.labels" . | nindent 4 }}
+    {{- include "template.docs.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "this-is-tobi-docs.docs.fullname" . }}
+    name: {{ include "template.docs.fullname" . }}
   minReplicas: {{ .Values.docs.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.docs.autoscaling.maxReplicas }}
   metrics:

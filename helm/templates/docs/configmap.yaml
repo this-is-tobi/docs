@@ -1,8 +1,14 @@
-{{- if .Values.docs.container.env -}}
+{{- if or .Values.docs.env .Values.global.env -}}
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ include "this-is-tobi-docs.docs.fullname" . }}
-  labels: {{- include "this-is-tobi-docs.docs.labels" . | nindent 4 }}
-data: {{- include "this-is-tobi-docs.containerEnv" .Values.docs.container | indent 2 }}
+  name: {{ include "template.docs.fullname" . }}
+  labels: {{- include "template.docs.labels" . | nindent 4 }}
+data:
+  {{- if .Values.global.env -}}
+  {{- include "template.env" .Values.global | indent 2 }}
+  {{- end -}}
+  {{- if .Values.docs.env -}}
+  {{- include "template.env" .Values.docs | indent 2 }}
+  {{- end -}}
 {{- end -}}

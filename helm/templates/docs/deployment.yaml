@@ -1,63 +1,120 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "this-is-tobi-docs.docs.fullname" . }}
+  name: {{ include "template.docs.fullname" . }}
   labels:
-    {{- include "this-is-tobi-docs.docs.labels" . | nindent 4 }}
+    {{- include "template.docs.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.docs.autoscaling.enabled }}
   replicas: {{ .Values.docs.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "this-is-tobi-docs.docs.selectorLabels" . | nindent 6 }}
+      {{- include "template.docs.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.docs.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- if (include "checksum" (list $ "/docs/configmap.yaml")) }}
+          {{- include "checksum" (list $ "/docs/configmap.yaml") | nindent 8 }}
+        {{- end }}
+        {{- if (include "checksum" (list $ "/docs/secret.yaml")) }}
+          {{- include "checksum" (list $ "/docs/secret.yaml") | nindent 8 }}
+        {{- end }}
+        {{- with .Values.docs.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
-        {{- include "this-is-tobi-docs.docs.selectorLabels" . | nindent 8 }}
-    spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
+        {{- include "template.docs.selectorLabels" . | nindent 8 }}
+        {{- with .Values.docs.podLabels }}
         {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      strategy:
+        type: {{ .Values.docs.strategy.type }}
+      {{- if and .Values.docs.imageCredentials.username .Values.docs.imageCredentials.password }}
+      imagePullSecrets:
+      - name: {{ include "template.docs.fullname" . }}-pullsecret
       {{- end }}
-      serviceAccountName: {{ include "this-is-tobi-docs.serviceAccountName" . }}
+      serviceAccountName: {{ include "template.docs.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.docs.podSecurityContext | nindent 8 }}
+      {{- if .Values.docs.initContainers }}
+      initContainers:
+        {{- toYaml .Values.docs.initContainers | nindent 8 }}
+      {{- end }}
+      {{- if .Values.docs.extraContainers }}  
+        {{- toYaml .Values.docs.extraContainers | nindent 8 }}  
+      {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.docs.securityContext | nindent 12 }}
-          image: "{{ .Values.docs.image.repository }}:{{ .Values.docs.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.docs.image.pullPolicy }}
-          ports:
-            - containerPort: {{ .Values.docs.container.port }}
-              protocol: TCP
-              name: http
-          {{- if or .Values.docs.container.env .Values.docs.container.secrets }}
-          envFrom:
-          {{- if .Values.docs.container.env }}
-          - configMapRef:
-              name: {{ include "this-is-tobi-docs.docs.fullname" . }}
-          {{- end }}
-          {{- if .Values.docs.container.secrets }}
-          - secretRef:
-              name: {{ include "this-is-tobi-docs.docs.fullname" . }}
-          {{- end }}
-          {{- end }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.docs.resources | nindent 12 }}
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.docs.container.securityContext | nindent 12 }}
+        image: "{{ .Values.docs.image.repository }}:{{ .Values.docs.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.docs.image.pullPolicy }}
+        {{- if .Values.docs.container.command }}
+        command:
+        {{- range .Values.docs.container.command }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- end }}
+        {{- if .Values.docs.container.args }}
+        args:
+        {{- range .Values.docs.container.args }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- end }}
+        ports:
+        - containerPort: {{ .Values.docs.service.port }}
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: {{ include "template.docs.fullname" . }}-api
+        - secretRef:
+            name: {{ include "template.docs.fullname" . }}-api
+        {{- if .Values.docs.startupProbe.enabled }}
+        startupProbe:
+          httpGet:
+            path: {{ .Values.docs.healthcheckPath }}
+            port: {{ .Values.docs.container.port }}
+          initialDelaySeconds: {{ .Values.docs.startupProbe.initialDelaySeconds }}
+          successThreshold: {{ .Values.docs.startupProbe.successThreshold }}
+          failureThreshold: {{ .Values.docs.startupProbe.failureThreshold }}
+          periodSeconds: {{ .Values.docs.startupProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.docs.startupProbe.timeoutSeconds }}
+        {{- end }}
+        {{- if .Values.docs.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.docs.healthcheckPath }}
+            port: {{ .Values.docs.container.port }}
+          initialDelaySeconds: {{ .Values.docs.readinessProbe.initialDelaySeconds }}
+          successThreshold: {{ .Values.docs.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.docs.readinessProbe.failureThreshold }}
+          periodSeconds: {{ .Values.docs.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.docs.readinessProbe.timeoutSeconds }}
+        {{- end }}
+        {{- if .Values.docs.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.docs.healthcheckPath }}
+            port: {{ .Values.docs.container.port }}
+          initialDelaySeconds: {{ .Values.docs.livenessProbe.initialDelaySeconds }}
+          successThreshold: {{ .Values.docs.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.docs.livenessProbe.failureThreshold }}
+          periodSeconds: {{ .Values.docs.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.docs.livenessProbe.timeoutSeconds }}
+        {{- end }}
+        {{- if .Values.docs.hostAliases }}  
+        hostAliases:
+          {{- toYaml .Values.docs.hostAliases | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.docs.resources | nindent 10 }}
+        volumeMounts:
+        {{- range $volumeMount := .Values.docs.extraVolumeMounts }}
+        - name: {{ $volumeMount.name }}
+          mountPath: {{ $volumeMount.mountPath }}
+        {{- end }}
       {{- with .Values.docs.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -69,4 +126,16 @@ spec:
       {{- with .Values.docs.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- range $volume := .Values.docs.extraVolumes }}
+      - name: {{ $volume.name }}
+        {{- if eq $volume.type "hostPath" }}
+        hostPath:
+          path: {{ $volume.path }}
+        {{- end }}
+        {{- if eq $volume.type "configMap" }}
+        configMap:
+          name: {{ $volume.name }}
+        {{- end }}
       {{- end }}

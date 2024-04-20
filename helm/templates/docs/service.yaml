@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "this-is-tobi-docs.docs.fullname" . }}
+  name: {{ include "template.docs.fullname" . }}
   labels:
-    {{- include "this-is-tobi-docs.docs.labels" . | nindent 4 }}
+    {{- include "template.docs.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.docs.service.type }}
   ports:
@@ -11,4 +11,4 @@ spec:
       targetPort: {{ .Values.docs.container.port }}
       protocol: TCP
   selector:
-    {{- include "this-is-tobi-docs.docs.selectorLabels" . | nindent 4 }}
+    {{- include "template.docs.selectorLabels" . | nindent 4 }}

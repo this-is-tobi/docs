@@ -13,6 +13,8 @@ After downloading all project documentation files, it will build a static websit
 
 The script runs in a [workflow](./.github/workflows/sync.yml) every week (Sunday - 03:00 am) or can be triggered manually from the Github user interface.
 
+In addition, after each workflow run, images older than 30 days will be deleted and the newly created container will be deployed.
+
 ## Prerequisites
 
 To run the shell script that build the static website, install :

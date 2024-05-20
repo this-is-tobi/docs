@@ -61,3 +61,15 @@ jobs:
             -i "docs" \
             -g "${{ secrets.GITHUB_TOKEN }}" \
             -u "this-is-tobi"
+
+      - name: Deploy docs
+        uses: scaleway/action-scw@v0
+        with:
+          save-config: false
+          export-config: false
+          version: v2.30.0
+          access-key: ${{ secrets.SCW_ACCESS_KEY }}
+          secret-key: ${{ secrets.SCW_SECRET_KEY }}
+          default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          default-organization-id: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          args: container container deploy ${{ secrets.SCW_CONTAINER_ID }}

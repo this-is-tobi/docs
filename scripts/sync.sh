@@ -10,6 +10,7 @@ i=1
 # Variables
 USER=this-is-tobi
 REPOS=(
+  cheatsheets
   docs
   dotfiles
   gitmojidex

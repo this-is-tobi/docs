@@ -40,3 +40,12 @@ To run the application in development mode, install :
     ```sh
     pnpm run dev
     ```
+
+## Rules
+
+It is important to understand and respect some conventions for the script to work correctly :
+- Only the `docs/` root folder in the repository will be parsed to import advanced documentation (multi pages documentation, embed images or files, etc...).
+- The `README.md` root file will only be imported if there is no `./docs/01-readme.md` file (this allows you to manage differences between the readme file and the advanced documentation introduction page, for example using a table of contents in the readme file that makes no sense in the documentation website).
+- Any inline link in the `README.md` root file that does not point to `./docs/**` will be replaced by the appropriate Github link.
+- Each project description on the home page is extracted from the Github repository description.
+<!-- - Each project badge is fetched from the Github repository topics (https://docs.github.com/fr/rest/repos/repos?apiVersion=2022-11-28#get-all-repository-topics). -->

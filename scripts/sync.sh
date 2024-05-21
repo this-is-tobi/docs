@@ -97,6 +97,9 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
     rm $FILE
     FILENAME="$(basename ${UPDATED_FILE%.*})"
     FORMATED_FILE="$(echo "$FILENAME" | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' | tr '-' ' ')"
+    if [ "$FILENAME" = "readme" ]; then
+      continue
+    fi
     jq \
       --arg f "$FORMATED_FILE" \
       --arg n "$FILENAME" \

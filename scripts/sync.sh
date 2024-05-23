@@ -18,15 +18,55 @@ export GITHUB_REPOS=(
 )
 export GITHUB_BRANCH=main
 
+# Utils functions
+split_by_comma() {
+  local IFS=,
+  local WORD_LIST=($1)
+  for word in "${WORD_LIST[@]}"; do
+    echo "$word"
+  done
+}
 
 # Add sources infos into readme file
-addSourcesPage () {
+add_sources_page () {
   printf "
 # Sources
 
 Take a look at the [project sources]($1).
 " >> $2
 }
+
+
+# Declare script helper
+TEXT_HELPER="\nThis script aims to build documentation for a given Github user and a list of his repositories.
+Following flags are available:
+
+  -b    Branch used to clone documentation.
+
+  -r    List of Github user repositories.
+
+  -u    Github user.
+
+  -h    Print script help.\n\n"
+
+print_help() {
+  printf "$TEXT_HELPER"
+}
+
+# Parse options
+while getopts hb:r:u: flag; do
+  case "${flag}" in
+    b)
+      GITHUB_BRANCH=${OPTARG};;
+    r)
+      GITHUB_REPOS=($(split_by_comma "${OPTARG}"));;
+    u)
+      GITHUB_USER=${OPTARG};;
+    h | *)
+      print_help
+      exit 0;;
+  esac
+done
 
 
 # Clean up before processing
@@ -73,7 +113,7 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
   fi
 
   # Add sources page and update links
-  addSourcesPage "https://github.com/$GITHUB_USER/$GITHUB_REPO" "src/projects/$GITHUB_REPO/sources.md"
+  add_sources_page "https://github.com/$GITHUB_USER/$GITHUB_REPO" "src/projects/$GITHUB_REPO/sources.md"
   DESCRIPTION="$(curl -s https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO | jq -r '.description // empty')"
   FORMATED_REPO="$(echo $GITHUB_REPO | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1'| sed 's/-/\ /g')"
 

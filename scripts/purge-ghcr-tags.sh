@@ -14,10 +14,10 @@ else
 fi
 
 # Declare script helper
-TEXT_HELPER="\nThis script aims to delete an image with all its subsequent images in ghcr.
+TEXT_HELPER="\nThis script aims to delete ghcr image tags with all its subsequent images older than a given date.
 Following flags are available:
 
-  -d    Date from which images will be deleted.
+  -d    Date from which images will be deleted (format: 'yyyy-mm-dd', default is 1 month ago).
 
   -g    Github token to perform api calls.
 

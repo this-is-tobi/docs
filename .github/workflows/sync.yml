@@ -57,7 +57,7 @@ jobs:
       - name: Clean up old images
         if: ${{ success() }}
         run: |
-          ./scripts/purge-images.sh \
+          ./scripts/purge-ghcr-tags.sh \
             -i "docs" \
             -g "${{ secrets.GITHUB_TOKEN }}" \
             -u "this-is-tobi"

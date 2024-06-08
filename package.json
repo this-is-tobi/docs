@@ -13,7 +13,7 @@
   },
   "author": "this-is-tobi",
   "devDependencies": {
-    "vitepress": "^1.2.2"
+    "vitepress": "^1.2.3"
   },
   "volta": {
     "node": "20.14.0"

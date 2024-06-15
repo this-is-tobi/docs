@@ -11,6 +11,7 @@ export GITHUB_REPOS=(
   docs
   dotfiles
   gitmojidex
+  helm-charts
   homelab
   multiarch-mirror
   template-monorepo-ts

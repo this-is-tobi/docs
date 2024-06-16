@@ -12,7 +12,7 @@ const emailSvg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://ww
 
 const members = [
   {
-    avatar: 'https://www.github.com/this-is-tobi.png',
+    avatar: '/android-chrome-512x512.png',
     name: 'Thibault Colin',
     title: 'Typescript Developer / DevOps Architect',
     org: 'French Ministry of the Interior',

@@ -29,37 +29,14 @@ split_by_comma() {
 }
 
 # Add sources infos into readme file
-add_sources_page () {
+add_sources () {
+  [ "$(basename $2)" = "readme.md" ] && TITLE="## Sources" || TITLE="# Sources"
   printf "
-# Sources
+$TITLE
 
 Take a look at the [project sources]($1).
 
-## Contributions
-
-Commits must follow the specification of [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), it is possible to add the [VSCode extension](https://github.com/vivaxy/vscode-conventional-commits) to facilitate the creation of commits.
-
-A PR must be made with an updated branch with the \`main\` branch in rebase (and without merge) before requesting a merge, and the merge must be requested in \`main\`.
-
-## Security issues
-
-If you believe you have found a security vulnerability in any of my repository, please report it to us through coordinated disclosure.
-
-**Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
-
-Instead, please send an email to <this-is-tobi@proton.me>.
-
-Please include as much of the information listed below as you can to help us better understand and resolve the issue:
-
-  * The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
-  * Full paths of source file(s) related to the manifestation of the issue
-  * The location of the affected source code (tag/branch/commit or direct URL)
-  * Any special configuration required to reproduce the issue
-  * Step-by-step instructions to reproduce the issue
-  * Proof-of-concept or exploit code (if possible)
-  * Impact of the issue, including how an attacker might exploit the issue
-
-This information will help me triage your report more quickly.
+If you'd like to improve or fix the code, check out the [contribution guidelines](/contributions).
 " >> $2
 }
 
@@ -104,7 +81,8 @@ rm -rf src/projects \
   && mkdir tmp src/projects \
   && touch tmp/sidebar.json && echo "[]" > tmp/sidebar.json \
   && cp src/index.md src/projects/index.md \
-  && cp src/about.md src/projects/about.md
+  && cp src/about.md src/projects/about.md \
+  && cp src/contributions.md src/projects/contributions.md
 
 # Download utility script to clone subdir
 wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/shell/clone-subdir.sh" -O "tmp/clone-subdir.sh" \
@@ -116,6 +94,7 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
   printf "\n\n${red}[doc generator].${no_color} Processing project '$GITHUB_REPO'\n"
 
   export GITHUB_REPO=$GITHUB_REPO
+  DEDICATED_SOURCE_PAGE=false
 
   # Create tmp and src folders for processing project
   mkdir -p tmp/projects/$GITHUB_REPO src/projects/$GITHUB_REPO
@@ -129,7 +108,14 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
       -o "src/projects/$GITHUB_REPO" \
       -s "docs" \
       -u "https://github.com/$GITHUB_USER/$GITHUB_REPO"
+
+    # Add sources page
+    if [[ -n $(find src/projects/$GITHUB_REPO -name "*.md") ]]; then
+      DEDICATED_SOURCE_PAGE=true
+      add_sources "https://github.com/$GITHUB_USER/$GITHUB_REPO" "src/projects/$GITHUB_REPO/sources.md"
+    fi
   fi
+
   README_FILE_STATUS="$(curl --write-out '%{http_code}' --silent --output /dev/null https://github.com/$GITHUB_USER/$GITHUB_REPO/tree/$GITHUB_BRANCH/docs/01-readme.md)"
   if [ "$README_FILE_STATUS" = '404' ]; then
     wget -q "https://raw.githubusercontent.com/$GITHUB_USER/$GITHUB_REPO/$GITHUB_BRANCH/README.md" -O "tmp/projects/$GITHUB_REPO/readme.md"
@@ -137,10 +123,12 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
       | perl -pe 's{\[([^]]+)\]\((?!\.?/docs/|docs/|http)(\.?/)?([^/][^)]*)\)}{[$1](https://github.com/$ENV{GITHUB_USER}/$ENV{GITHUB_REPO}/tree/$ENV{GITHUB_BRANCH}/$3)}g' \
       | perl -pe 's{\[([^]]+)\]\((\.?/docs/)([^)]*)\)}{[$1]($3)}g' \
       > "src/projects/$GITHUB_REPO/readme.md"
+
+    # Add sources page
+    add_sources "https://github.com/$GITHUB_USER/$GITHUB_REPO" "src/projects/$GITHUB_REPO/readme.md"
   fi
 
-  # Add sources page and update links
-  add_sources_page "https://github.com/$GITHUB_USER/$GITHUB_REPO" "src/projects/$GITHUB_REPO/sources.md"
+  # Update links
   DESCRIPTION="$(curl -s https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO | jq -r '.description // empty')"
   FORMATED_REPO="$(echo $GITHUB_REPO | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1'| sed 's/-/\ /g')"
 
@@ -179,13 +167,15 @@ for GITHUB_REPO in ${GITHUB_REPOS[@]}; do
   done
 
   # Add sources to project sidebar
-  jq \
-    --arg r "$GITHUB_REPO" \
-    '. += [{ 
-      text: "Sources", 
-      link: ("/" + $r + "/sources") 
-    }]' tmp/projects/$GITHUB_REPO/config.json > src/projects/$GITHUB_REPO/config.json
-  cp src/projects/$GITHUB_REPO/config.json tmp/projects/$GITHUB_REPO/config.json
+  if [ "$DEDICATED_SOURCE_PAGE" = "true" ]; then
+    jq \
+      --arg r "$GITHUB_REPO" \
+      '. += [{ 
+        text: "Sources", 
+        link: ("/" + $r + "/sources") 
+      }]' tmp/projects/$GITHUB_REPO/config.json > src/projects/$GITHUB_REPO/config.json
+    cp src/projects/$GITHUB_REPO/config.json tmp/projects/$GITHUB_REPO/config.json
+  fi
 
   # Add project to home page
   yq -i \

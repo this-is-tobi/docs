@@ -25,6 +25,7 @@ export default defineConfig({
     sidebar,
     nav: [
       { text: 'About', link: '/about' },
+      { text: 'Contributions', link: '/contributions' },
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/this-is-tobi' },

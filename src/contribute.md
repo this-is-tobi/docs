@@ -18,27 +18,27 @@ Check whether the repository has linting rules or tests to keep them clean and e
 
 If you believe you have found a security vulnerability in any of my repository, please report it to me through coordinated disclosure.
 
-**Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
+__Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.__
 
 Instead, please send an email to <this-is-tobi@proton.me>.
 
 Please include as much of the information listed below as you can to help us better understand and resolve the issue:
 
-  * The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
-  * Full paths of source file(s) related to the manifestation of the issue
-  * The location of the affected source code (tag/branch/commit or direct URL)
-  * Any special configuration required to reproduce the issue
-  * Step-by-step instructions to reproduce the issue
-  * Proof-of-concept or exploit code (if possible)
-  * Impact of the issue, including how an attacker might exploit the issue
+- The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
+- Full paths of source file(s) related to the manifestation of the issue
+- The location of the affected source code (tag/branch/commit or direct URL)
+- Any special configuration required to reproduce the issue
+- Step-by-step instructions to reproduce the issue
+- Proof-of-concept or exploit code (if possible)
+- Impact of the issue, including how an attacker might exploit the issue
 
 This information will help me triage your report more quickly.
 
-## Licence
+## License
 
-All the repositories I own are distributed under the MIT license by default, unless the repository in question has its own license, in which case the dedicated license applies.
+> All the repositories I own are distributed under the MIT license by default, unless the repository in question has its own license, in which case the dedicated license applies.
 
-Copyright (c) 2020-PRESENT Thibault COLIN
+Copyright (c) 2020-PRESENT Thibault Colin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

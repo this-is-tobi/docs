@@ -36,7 +36,7 @@ $TITLE
 
 Take a look at the [project sources]($1).
 
-If you'd like to improve or fix the code, check out the [contribution guidelines](/contributions).
+If you'd like to improve or fix the code, check out the [contribution guidelines](/contribute).
 " >> $2
 }
 
@@ -82,7 +82,8 @@ rm -rf src/projects \
   && touch tmp/sidebar.json && echo "[]" > tmp/sidebar.json \
   && cp src/index.md src/projects/index.md \
   && cp src/about.md src/projects/about.md \
-  && cp src/contribute.md src/projects/contribute.md
+  && cp src/contribute.md src/projects/contribute.md \
+  && cp src/oss.md src/projects/oss.md
 
 # Download utility script to clone subdir
 wget -q "https://raw.githubusercontent.com/this-is-tobi/tools/main/shell/clone-subdir.sh" -O "tmp/clone-subdir.sh" \

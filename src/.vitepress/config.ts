@@ -26,6 +26,7 @@ export default defineConfig({
     nav: [
       { text: 'About', link: '/about' },
       { text: 'Contribute', link: '/contribute' },
+      { text: 'OSS', link: '/oss' },
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/this-is-tobi' },

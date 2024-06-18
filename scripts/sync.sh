@@ -47,9 +47,9 @@ Following flags are available:
 
   -b    Branch used to clone documentation.
 
-  -r    List of Github user repositories.
+  -r    List of Github user repositories (comma separated repo name list).
 
-  -u    Github user.
+  -u    Github user / organization.
 
   -h    Print script help.\n\n"
 

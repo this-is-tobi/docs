@@ -6,6 +6,32 @@ layout: doc
 
 As part of my professional activity, I have worked on a number of open source projects, which are listed below *(this is not necessarily an explicit list).*
 
+## Basegun
+
+<Badge type="info" text="DevOps Engineer" />
+
+### Introduction
+
+According to the DCPJ (French Police forces), over 7,000 firearms are seized every year, of which 15-20% are misidentified or unidentified. This leads to errors in the legal classification of weapons, with the following consequences:
+
+- No criminal prosecution or, conversely, unjustified prosecution.
+- Excessive use of firearms experts.
+- erroneous sale of weapons subject to authorization by civilian gunsmiths.
+
+Basegun is an application designed for law enforcement agencies, where simply taking a photo of a firearm is enough to obtain, with the help of an artificial intelligence model, an identification result that helps them in their procedures.
+
+### Technologies
+
+Main technologies I worked with on the project :
+
+- [GitHub Actions](https://github.com/features/actions) *- continuous integration / continuous delivery platform.*
+- [Helm](https://helm.sh/) *- package manager for kubernetes.*
+- [Kubernetes](https://kubernetes.io/) *- container orchestrator system.*
+
+### Sources
+
+The repository of the project is available [here](https://github.com/dnum-mi/basegun).
+
 ## Cloud π Native 
 
 <Badge type="info" text="Product Owner" />

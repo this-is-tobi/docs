@@ -193,6 +193,5 @@ dist
 cache/
 dist/
 
-# projects docs
-src/projects
-tmp/
+# docpress
+docpress

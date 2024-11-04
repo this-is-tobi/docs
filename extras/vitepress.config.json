@@ -1,0 +1,9 @@
+{
+  "title": "Home",
+  "description": "Tobi's projects",
+  "themeConfig": {
+    "socialLinks": [
+      { "icon": "github", "link": "https://github.com/this-is-tobi" }
+    ]
+  }
+}

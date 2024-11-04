@@ -1,0 +1,20 @@
+{
+  "prodiver": "github",
+  "username": "this-is-tobi",
+  "reposFilter": [
+    "cheatsheets",
+    "docpress",
+    "dotfiles",
+    "gitmojidex",
+    "helm-charts",
+    "homelab",
+    "multiarch-mirror",
+    "template-monorepo-ts",
+    "tools"
+  ],
+  "branch": "main",
+  "extraHeaderPages": "./extras/pages",
+  "extraPublicContent": "./extras/public",
+  "extraTheme": "./extras/theme",
+  "vitepressConfig": "./extras/vitepress.config.json"
+}

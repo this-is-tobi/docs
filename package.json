@@ -1,21 +1,13 @@
 {
   "name": "docs",
   "version": "1.0.0",
-  "description": "A simple automated documentation builder with vitepress",
-  "type": "module",
   "scripts": {
-    "build": "vitepress build ./src",
-    "dev": "vitepress dev ./src --port 8080",
-    "docker:build": "docker build --tag robots/docs --target prod .",
-    "docker:run": "docker run --publish 8080:8080 --rm robots/docs",
-    "preview": "vitepress preview ./src",
-    "sync": "./scripts/sync.sh"
+    "build": "npm run build:docs && npm run build:docker",
+    "build:docs": "rm -rf ./docpress && docpress -C ./docpress.config.json",
+    "build:docker": "docker build --tag tobi-or-not/docs --target prod .",
+    "start": "docker run --publish 8080:8080 --rm tobi-or-not/docs"
   },
-  "author": "this-is-tobi",
-  "devDependencies": {
-    "vitepress": "^1.3.4"
-  },
-  "volta": {
-    "node": "20.17.0"
+  "dependencies": {
+    "@tobi-or-not/docpress": "^0.1.6"
   }
 }

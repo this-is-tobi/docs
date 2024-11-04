@@ -32,7 +32,7 @@ Main technologies I worked with on the project :
 
 The repository of the project is available [here](https://github.com/dnum-mi/basegun).
 
-## Cloud π Native 
+## Cloud π Native
 
 <Badge type="info" text="Product Owner" />
 <Badge type="info" text="Platform Engineer" />

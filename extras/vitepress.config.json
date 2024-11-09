@@ -1,6 +1,7 @@
 {
   "title": "Home",
   "description": "Tobi's projects",
+  "cleanUrls": true,
   "themeConfig": {
     "socialLinks": [
       { "icon": "github", "link": "https://github.com/this-is-tobi" }

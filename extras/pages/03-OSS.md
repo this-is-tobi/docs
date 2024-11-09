@@ -1,5 +1,8 @@
 ---
 layout: doc
+sidebar: true
+footer: true
+pageClass: VPHeaderPage
 ---
 
 # OSS Projects

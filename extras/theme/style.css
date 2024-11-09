@@ -154,3 +154,17 @@
   --docsearch-primary-color: var(--vp-c-brand) !important;
 }
 
+
+/**
+ * Custom classes
+ * -------------------------------------------------------------------------- */
+
+.VPHeaderPage .pager-link {
+  display: none !important;
+}
+.VPHeaderPage .prev-next {
+  display: none !important;
+}
+.VPHeaderPage .content {
+  margin: 0 auto !important;
+}

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tobi-or-not/docpress':
-        specifier: ^0.1.6
-        version: 0.1.6(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
+        specifier: ^0.2.1
+        version: 0.2.1(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
 
 packages:
 
@@ -498,8 +498,8 @@ packages:
   '@shikijs/vscode-textmate@9.3.0':
     resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
 
-  '@tobi-or-not/docpress@0.1.6':
-    resolution: {integrity: sha512-Rir2Gj9f5c3v3kMH4144rCmW2vCE1xZB1Uh7mtb97U44benV7nT8npUklufhYns4kZFaZJ0ahpeMHtY+4OzbWg==}
+  '@tobi-or-not/docpress@0.2.1':
+    resolution: {integrity: sha512-BTbHdN9nZ7bn7ddSHzIZMgVHvlE8QW6XpKLapAQAzYCTLfTgXb0Kit+ZL/SSzIp0/3mS5Vf6Yq+sVwuBHZZAxQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -671,6 +671,10 @@ packages:
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
+
+  chalk@5.3.0:
+    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   character-entities-html4@2.1.0:
     resolution: {integrity: sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==}
@@ -1086,6 +1090,12 @@ packages:
     resolution: {integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==}
     engines: {node: '>= 14'}
     hasBin: true
+
+  zod-validation-error@3.4.0:
+    resolution: {integrity: sha512-ZOPR9SVY6Pb2qqO5XHt+MkkTRxGXb4EVtnjc9JpXUOtUB1T9Ru7mZOT361AN3MsetVe7R0a1KZshJDZdgp9miQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.18.0
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -1561,9 +1571,10 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.3.0': {}
 
-  '@tobi-or-not/docpress@0.1.6(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
+  '@tobi-or-not/docpress@0.2.1(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
     dependencies:
       axios: 1.7.7
+      chalk: 5.3.0
       commander: 12.1.0
       octokit: 4.0.2
       rimraf: 6.0.1
@@ -1571,6 +1582,7 @@ snapshots:
       vitepress: 1.4.5(@algolia/client-search@5.12.0)(axios@1.7.7)(postcss@8.4.47)(search-insights@2.17.2)
       yaml: 2.6.0
       zod: 3.23.8
+      zod-validation-error: 3.4.0(zod@3.23.8)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -1786,6 +1798,8 @@ snapshots:
       balanced-match: 1.0.2
 
   ccount@2.0.1: {}
+
+  chalk@5.3.0: {}
 
   character-entities-html4@2.1.0: {}
 
@@ -2249,6 +2263,10 @@ snapshots:
       strip-ansi: 7.1.0
 
   yaml@2.6.0: {}
+
+  zod-validation-error@3.4.0(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
 
   zod@3.23.8: {}
 

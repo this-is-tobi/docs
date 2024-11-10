@@ -8,6 +8,6 @@
     "start": "docker run --publish 8080:8080 --rm tobi-or-not/docs"
   },
   "dependencies": {
-    "@tobi-or-not/docpress": "^0.2.1"
+    "@tobi-or-not/docpress": "^0.2.2"
   }
 }

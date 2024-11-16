@@ -1,6 +1,11 @@
 ---
-layout: home
+layout: doc
+sidebar: true
+aside: false
+footer: true
+pageClass: VPHeaderPage
 ---
+
 <script setup>
 import {
   VPTeamPage,
@@ -35,6 +40,10 @@ const members = [
 
 .vp-doc .VPTeamMembers.medium.count-1 .profile {
   background-color: color-mix(in srgb, var(--vp-c-bg-soft), transparent 70%) !important;
+}
+
+.vp-doc .VPTeamPage {
+  margin: 0px !important;
 }
 </style>
 

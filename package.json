@@ -5,7 +5,8 @@
     "build": "npm run build:docs && npm run build:docker",
     "build:docs": "rm -rf ./docpress && docpress -C ./docpress.config.json",
     "build:docker": "docker build --tag tobi-or-not/docs --target prod .",
-    "start": "docker run --publish 8080:8080 --rm tobi-or-not/docs"
+    "start": "docker run --publish 8080:8080 --rm --name docs tobi-or-not/docs",
+    "stop": "docker stop docs"
   },
   "dependencies": {
     "@tobi-or-not/docpress": "^0.2.2"

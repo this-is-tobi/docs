@@ -10,11 +10,56 @@
     "homelab",
     "multiarch-mirror",
     "template-monorepo-ts",
-    "tools"
+    "tools",
+    "!tuto-static",
+    "!tuto-static-infra-manifest",
+    "!dso-tuto-static",
+    "!dso-tuto-static-deploy",
+    "!flower-recognition"
   ],
   "branch": "main",
-  "extraHeaderPages": "./extras/pages",
-  "extraPublicContent": "./extras/public",
-  "extraTheme": "./extras/theme",
-  "vitepressConfig": "./extras/vitepress.config.json"
+  "extraHeaderPages": ["./extras/pages"],
+  "extraPublicContent": ["./extras/public"],
+  "extraTheme": ["./extras/theme"],
+  "vitepressConfig": {
+    "base": "/",
+    "srcDir": "./docs",
+    "cleanUrls": true,
+    "vite": {
+      "publicDir": "../public"
+    },
+    "title": "Home",
+    "description": "Tobi's projects",
+    "lang": "en-US",
+    "ignoreDeadLinks": "localhostLinks",
+    "themeConfig": {
+      "socialLinks": [
+        { "icon": "github", "link": "https://github.com/this-is-tobi" }
+      ],
+      "outline": [2, 3],
+      "search": {
+        "provider": "local",
+        "options": {
+          "translations": {
+            "button": {
+              "buttonText": "Search...",
+              "buttonAriaLabel": "Search"
+            },
+            "modal": {
+              "backButtonTitle": "erase search",
+              "displayDetails": "show details",
+              "noResultsText": "No results for : ",
+              "resetButtonTitle": "cancel search",
+              "footer": {
+                "selectText": "go to",
+                "navigateText": "navigate in results",
+                "closeText": "close"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "forks": true
 }

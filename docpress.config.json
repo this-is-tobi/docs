@@ -4,6 +4,7 @@
   "reposFilter": [
     "cheatsheets",
     "docpress",
+    "docpress-action",
     "dotfiles",
     "gitmojidex",
     "helm-charts",

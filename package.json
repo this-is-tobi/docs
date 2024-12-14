@@ -10,6 +10,6 @@
     "stop": "docker stop docs"
   },
   "dependencies": {
-    "@tobi-or-not/docpress": "^0.5.0"
+    "@tobi-or-not/docpress": "^0.5.1"
   }
 }

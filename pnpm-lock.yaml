@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tobi-or-not/docpress':
-        specifier: ^0.3.2
-        version: 0.3.2(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
+        specifier: ^0.5.0
+        version: 0.5.0(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
 
 packages:
 
@@ -514,8 +514,8 @@ packages:
   '@shikijs/vscode-textmate@9.3.0':
     resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
 
-  '@tobi-or-not/docpress@0.3.2':
-    resolution: {integrity: sha512-tcNzfC99REGJy78MpbyLIW6b5zavDpYqm7YIHyhAUb73hTe+lrwT0zzcQzyHXWDdFKapnfZzhNI63TC5ZEpuIg==}
+  '@tobi-or-not/docpress@0.5.0':
+    resolution: {integrity: sha512-HElZZTeyx5drRkoArnSKVWT9LAwKNpoOY2sihWSaBTUdG9D5RBwcqE7C6NfDfR4+hlrqT9uXk1p2QpFTHIdLHw==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -667,8 +667,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  axios@1.7.7:
-    resolution: {integrity: sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==}
+  axios@1.7.9:
+    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1113,8 +1113,8 @@ packages:
     peerDependencies:
       zod: ^3.18.0
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -1604,19 +1604,19 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.3.0': {}
 
-  '@tobi-or-not/docpress@0.3.2(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
+  '@tobi-or-not/docpress@0.5.0(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
     dependencies:
       '@octokit/rest': 21.0.2
-      axios: 1.7.7
+      axios: 1.7.9
       chalk: 5.3.0
       commander: 12.1.0
       octokit: 4.0.2
       rimraf: 6.0.1
       simple-git: 3.27.0
-      vitepress: 1.5.0(@algolia/client-search@5.12.0)(axios@1.7.7)(postcss@8.4.47)(search-insights@2.17.2)
+      vitepress: 1.5.0(@algolia/client-search@5.12.0)(axios@1.7.9)(postcss@8.4.47)(search-insights@2.17.2)
       yaml: 2.6.1
-      zod: 3.23.8
-      zod-validation-error: 3.4.0(zod@3.23.8)
+      zod: 3.24.1
+      zod-validation-error: 3.4.0(zod@3.24.1)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -1762,13 +1762,13 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@11.2.0(axios@1.7.7)(focus-trap@7.6.0)(vue@3.5.12)':
+  '@vueuse/integrations@11.2.0(axios@1.7.9)(focus-trap@7.6.0)(vue@3.5.12)':
     dependencies:
       '@vueuse/core': 11.2.0(vue@3.5.12)
       '@vueuse/shared': 11.2.0(vue@3.5.12)
       vue-demi: 0.14.10(vue@3.5.12)
     optionalDependencies:
-      axios: 1.7.7
+      axios: 1.7.9
       focus-trap: 7.6.0
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -1811,7 +1811,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.7.7:
+  axios@1.7.9:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.1
@@ -2219,7 +2219,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  vitepress@1.5.0(@algolia/client-search@5.12.0)(axios@1.7.7)(postcss@8.4.47)(search-insights@2.17.2):
+  vitepress@1.5.0(@algolia/client-search@5.12.0)(axios@1.7.9)(postcss@8.4.47)(search-insights@2.17.2):
     dependencies:
       '@docsearch/css': 3.6.3
       '@docsearch/js': 3.6.3(@algolia/client-search@5.12.0)(search-insights@2.17.2)
@@ -2232,7 +2232,7 @@ snapshots:
       '@vue/devtools-api': 7.6.2
       '@vue/shared': 3.5.12
       '@vueuse/core': 11.2.0(vue@3.5.12)
-      '@vueuse/integrations': 11.2.0(axios@1.7.7)(focus-trap@7.6.0)(vue@3.5.12)
+      '@vueuse/integrations': 11.2.0(axios@1.7.9)(focus-trap@7.6.0)(vue@3.5.12)
       focus-trap: 7.6.0
       mark.js: 8.11.1
       minisearch: 7.1.0
@@ -2299,10 +2299,10 @@ snapshots:
 
   yaml@2.6.1: {}
 
-  zod-validation-error@3.4.0(zod@3.23.8):
+  zod-validation-error@3.4.0(zod@3.24.1):
     dependencies:
-      zod: 3.23.8
+      zod: 3.24.1
 
-  zod@3.23.8: {}
+  zod@3.24.1: {}
 
   zwitch@2.0.4: {}

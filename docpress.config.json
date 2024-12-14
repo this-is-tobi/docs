@@ -2,6 +2,7 @@
   "prodiver": "github",
   "username": "this-is-tobi",
   "reposFilter": [
+    ".github",
     "cheatsheets",
     "docpress",
     "docpress-action",

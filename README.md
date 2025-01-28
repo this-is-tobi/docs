@@ -4,7 +4,7 @@ This project aims to automate the construction of documentation website based on
 
 ## Automation
 
-The build and deploy [workflow](./.github/workflows/sync.yml) runs every week (Sunday - 03:00 am) or can be triggered manually from the Github user interface.
+The build and deploy [workflow](./.github/workflows/sync.yml) runs every day (01:00 am) or can be triggered manually from the Github user interface.
 
 > [!TIP]
 > The workflow can be triggered by CLI with correct permissions using the following command : `gh workflow run .github/workflows/sync.yml --repo this-is-tobi/docs --ref main`

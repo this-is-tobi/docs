@@ -1,6 +1,6 @@
 {
   "prodiver": "github",
-  "username": "this-is-tobi",
+  "usernames": ["this-is-tobi"],
   "reposFilter": [
     ".github",
     "cheatsheets",

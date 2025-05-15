@@ -1,5 +1,5 @@
 # Prod stage
-FROM docker.io/bitnami/nginx:1.26.1 AS prod
+FROM docker.io/bitnami/nginx:1.28.0 AS prod
 
 COPY --chown=1001:0 --chmod=770 ./docpress/.vitepress/dist /opt/bitnami/nginx/html/
 COPY --chown=1001:0 --chmod=660 ./nginx.conf /opt/bitnami/nginx/conf/server_blocks/default.conf

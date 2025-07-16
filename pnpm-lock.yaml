@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tobi-or-not/docpress':
-        specifier: ^0.6.1
-        version: 0.6.1(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
+        specifier: ^0.7.0
+        version: 0.7.0(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)
 
 packages:
 
@@ -532,8 +532,8 @@ packages:
   '@shikijs/vscode-textmate@9.3.0':
     resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
 
-  '@tobi-or-not/docpress@0.6.1':
-    resolution: {integrity: sha512-+lxg6Q24IagkLLAfiBB7twTB2q55xJlNAbP0VkNDfFqHQWWJD4iUcjvQfjBr1LBccjxpTsgi2Vdrgi1xFQzXcw==}
+  '@tobi-or-not/docpress@0.7.0':
+    resolution: {integrity: sha512-+ZCklM7mHX6su2YpnruBQ24xsCU/wfVhqKBA66BGGY1jq0eebsWVYW9AsrmcWGm+U0gYxq1fVPU4QmqqAUF/mQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1643,7 +1643,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@9.3.0': {}
 
-  '@tobi-or-not/docpress@0.6.1(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
+  '@tobi-or-not/docpress@0.7.0(@algolia/client-search@5.12.0)(postcss@8.4.47)(search-insights@2.17.2)':
     dependencies:
       '@octokit/rest': 21.1.1
       axios: 1.7.9

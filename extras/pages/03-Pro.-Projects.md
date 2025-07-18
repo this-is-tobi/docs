@@ -5,7 +5,7 @@ footer: true
 pageClass: VPHeaderPage
 ---
 
-# OSS Projects
+# Professional Projects
 
 As part of my professional activity, I have worked on a number of open source projects, which are listed below *(this is not necessarily an explicit list).*
 

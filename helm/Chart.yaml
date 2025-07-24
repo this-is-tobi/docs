@@ -1,18 +1,17 @@
 apiVersion: v2
-name: this-is-tobi-docs
-description: A Helm chart to deploy this-is-tobi documentation
+name: tobi-docs
 type: application
-keywords: []
-home: https://github.com/this-is-tobi/docs
-sources:
-  - https://github.com/this-is-tobi/docs
-dependencies: []
-maintainers:
-  - name: this-is-tobi
-    email: this-is-tobi@proton.me
-    url: https://github.com/this-is-tobi
-# icon: A URL to an SVG or PNG image to be used as an icon (optional).
+version: 0.1.0
+appVersion: "0.1.0"
+description: A Helm chart to deploy tobi-docs.
+home: https://this-is-tobi.com
 deprecated: false
 annotations: {}
-version: 1.0.0
-appVersion: "1.0.0"
+keywords: []
+dependencies: []
+sources:
+- https://github.com/this-is-tobi/docs
+maintainers:
+- name: this-is-tobi
+  email: this-is-tobi@proton.me
+  url: https://this-is-tobi.com

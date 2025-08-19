@@ -19,9 +19,9 @@ const members = [
   {
     avatar: '/android-chrome-512x512.png',
     name: 'Thibault Colin',
-    title: 'Typescript Developer / DevOps Architect',
+    title: 'Tech Lead / Architect',
     org: 'French Ministry of the Interior',
-    orgLink: 'https://github.com/cloud-pi-native',
+    orgLink: 'https://github.com/dnum-mi',
     desc: 'After digging into the world of javascript, a strange world appeared where robots were ubiquitous, they call it DevOps.',
     links: [
       { icon: 'github', link: 'https://github.com/this-is-tobi' },

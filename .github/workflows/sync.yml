@@ -53,6 +53,7 @@ jobs:
 
     - name: Build docs
       run: |
+        set -e
         pnpm install --frozen-lockfile
         pnpm run build:docs -T '${{ secrets.GITHUB_TOKEN }}'
 

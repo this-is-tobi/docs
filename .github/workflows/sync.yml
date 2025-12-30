@@ -51,11 +51,11 @@ jobs:
         password: ${{ env.REGISTRY_PASSWORD }}
         logout: true
 
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
     - name: Build docs
-      run: |
-        set -e
-        pnpm install --frozen-lockfile
-        pnpm run build:docs -T '${{ secrets.GITHUB_TOKEN }}'
+      run: pnpm run build:docs -T '${{ secrets.GITHUB_TOKEN }}'
 
     - name: Build docker image
       uses: docker/build-push-action@v6

@@ -84,3 +84,41 @@ Main Kubernetes services I worked with on the project :
 ### Sources
 
 All public sources of the project are available [here](https://github.com/cloud-pi-native).
+
+## MIrAI
+
+<Badge type="info" text="Tech Lead" />
+<Badge type="info" text="Architect" />
+
+### Introduction
+
+MIrAI is an AI platform developed by the French government designed to provide multiple levels of services to facilitate the use and development of applications based on artificial intelligence models. The lower level provides models as a service via APIs, while the upper level offers a catalog of applications (based on both APIs and user interfaces) to provide end users with ready-to-use AI features (text extraction, document summarization, meeting summarization, chatbot, etc.).
+
+### Technologies
+
+Main technologies I worked with on the project :
+
+- [GitHub Actions](https://github.com/features/actions) *- continuous integration / continuous delivery platform.*
+- [Helm](https://helm.sh/) *- package manager for kubernetes.*
+- [Keycloak](https://www.keycloak.org/) *- open source identity and access management solution.*
+- [Kubernetes](https://kubernetes.io/) *- container orchestrator system.*
+- [K6](https://k6.io/) *- load testing tool.*
+- [Postgres](https://www.postgresql.org/) *- relational database management system.*
+- [Qdrant](https://qdrant.tech/) *- vector search engine and vector database for machine learning applications.*
+- [Redis](https://redis.io/) *- in-memory data structure store, used as a database, cache, and message broker.*
+
+Main Kubernetes services I worked with on the project :
+
+| Service                                                       | Description                                                                                                                                                                          |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [CNPG](https://cloudnative-pg.io/)                            | Cloud Native PostgreSQL operator for Kubernetes, providing high availability and management of PostgreSQL clusters.                                                                  |
+| [KNative](https://knative.dev/)                               | Kubernetes-based platform to build, deploy, and manage modern serverless workloads.                                                                                                  |
+| [KServe](https://kserve.github.io/)                           | Standardized Distributed Generative and Predictive AI Inference Platform for Scalable, Multi-Framework Deployment.                                                                   |
+| [LiteLLM](https://www.litellm.ai/)                            | Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails, loadbalancing and logging.                                 |
+| [Nvidia GPU Operator](https://github.com/NVIDIA/gpu-operator) | Manages NVIDIA GPU resources in Kubernetes clusters, simplifying the deployment and management of GPU drivers and software.                                                          |
+| [Open Webui](https://docs.openwebui.com/)                     | Extensible, feature-rich, and user-friendly self-hosted AI platform, it supports various LLM runners like Ollama and OpenAI-compatible APIs, with built-in inference engine for RAG. |
+| [VLLM](https://docs.vllm.ai/)                                 | VLLM is a fast and easy-to-use library for LLM inference and serving.                                                                                                                |
+
+### Sources
+
+All public sources of the project are available [here](https://github.com/IA-Generative).

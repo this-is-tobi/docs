@@ -1,8 +1,9 @@
 {
   "name": "docs",
   "version": "1.0.0",
+  "packageManager": "bun@1.3.14",
   "scripts": {
-    "build": "npm run build:docs && npm run build:docker",
+    "build": "bun run build:docs && bun run build:docker",
     "build:docs": "rm -rf ./docpress && docpress -C ./docpress.config.json",
     "build:vitepress": "docpress build -C ./docpress.config.json",
     "build:docker": "docker build --tag tobi-or-not/docs --target prod .",

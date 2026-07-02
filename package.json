@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "packageManager": "bun@1.3.14",
   "scripts": {
-    "build": "bun run build:docs && bun run build:docker",
+    "build": "bun run build:docker",
     "build:docs": "rm -rf ./docpress && docpress -C ./docpress.config.json",
     "build:vitepress": "docpress build -C ./docpress.config.json",
-    "build:docker": "docker build --tag tobi-or-not/docs --target prod .",
+    "build:docker": "docker build --tag tobi-or-not/docs --target prod --secret id=GITHUB_TOKEN,env=GITHUB_TOKEN .",
     "start": "docker run --publish 8080:8080 --rm --name docs tobi-or-not/docs",
     "stop": "docker stop docs"
   },
   "dependencies": {
-    "@tobi-or-not/docpress": "^0.8.1"
+    "@tobi-or-not/docpress": "^0.8.3"
   }
 }

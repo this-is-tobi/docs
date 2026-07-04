@@ -15,21 +15,20 @@ In addition, after each workflow run, images older than 30 days will be deleted 
 
 To run the application in development mode, install :
 - [docker](https://www.docker.com) *- container runtime.*
-- [nodejs](https://nodejs.org/) *- javascript runtime.*
-- [pnpm](https://pnpm.io/) *- powerful, space efficient node package manager.*
+- [bun](https://bun.com/) *- javascript runtime and package manager.*
 
 ## Development
 
 1. Update [docpress config file](./docpress.config.json).
-2. Install project nodejs dependencies.
+2. Install project dependencies.
     ```sh
-    pnpm install
+    bun install
     ```
 3. Build website. 
     ```sh
-    pnpm run build
+    bun run build
     ```
 4. Launch app container on port `8080`.
     ```sh
-    pnpm run start
+    bun run start
     ```

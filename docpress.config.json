@@ -1,5 +1,5 @@
 {
-  "prodiver": "github",
+  "gitProvider": "github",
   "usernames": ["this-is-tobi"],
   "reposFilter": [
     ".github",

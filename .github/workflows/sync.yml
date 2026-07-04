@@ -23,7 +23,6 @@ jobs:
       LATEST_TAG: true
       BUILD_AMD64: true
       BUILD_ARM64: true
-      USE_QEMU: true
     secrets:
       BUILD_SECRETS: |
         GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}

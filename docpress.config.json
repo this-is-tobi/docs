@@ -12,6 +12,7 @@
     "helm-charts",
     "homelab",
     "multiarch-mirror",
+    "rule-them-all",
     "template-monorepo-ts",
     "tools",
     "!tuto-static",

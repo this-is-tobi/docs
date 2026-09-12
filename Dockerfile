@@ -1,5 +1,5 @@
 # Build stage
-FROM docker.io/oven/bun:1.3.14 AS build
+FROM docker.io/oven/bun:1.4.2 AS build
 
 RUN apt-get update && apt-get install --yes --no-install-recommends git ca-certificates && update-ca-certificates && rm -rf /var/lib/apt/lists/*
 

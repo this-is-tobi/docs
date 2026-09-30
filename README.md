@@ -16,6 +16,7 @@ In addition, after each workflow run, images older than 30 days will be deleted 
 To run the application in development mode, install :
 - [docker](https://www.docker.com) *- container runtime.*
 - [bun](https://bun.com/) *- javascript runtime and package manager.*
+- [mise](https://mise.jdx.dev/) *- tool version manager, installs the bun version pinned in [mise.toml](./mise.toml) (optional).*
 
 ## Development
 

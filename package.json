@@ -11,6 +11,9 @@
     "stop": "docker stop docs"
   },
   "dependencies": {
-    "@tobi-or-not/docpress": "^0.12.3"
+    "@tobi-or-not/docpress": "^0.13.1"
+  },
+  "overrides": {
+    "lodash-es": "^4.18.1"
   }
 }

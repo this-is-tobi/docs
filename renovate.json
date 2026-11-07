@@ -1,0 +1,79 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    "helpers:pinGitHubActionDigests",
+    "docker:pinDigests"
+  ],
+  "timezone": "Europe/Paris",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "minimumReleaseAge": "3 days",
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on the first day of the month"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["dependencies", "security"],
+    "schedule": ["at any time"]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Tool versions handed to an action, marked with a 'renovate:' comment on the line above, such as the Scaleway CLI the deploy job installs",
+      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+[\\w-]+: (?<currentValue>\\S+)"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Group non-major updates into a single PR to keep review cheap",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "non-major dependencies"
+    },
+    {
+      "description": "Majors stay separate, they need a deliberate look",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Overrides pin patched versions of transitive dependencies, their major has to stay the one the dependents require",
+      "matchDepTypes": ["overrides"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Keep the bun pin in package.json, mise.toml and the build image in one PR",
+      "matchPackageNames": ["bun", "oven-sh/bun", "oven/bun", "docker.io/oven/bun"],
+      "groupName": "bun"
+    },
+    {
+      "description": "docpress is ours: a release gets a PR of its own as soon as it is out, so it reaches the website at once. bunfig.toml exempts it from the same wait",
+      "matchPackageNames": ["@tobi-or-not/docpress"],
+      "groupName": "docpress",
+      "minimumReleaseAge": null,
+      "schedule": ["at any time"]
+    },
+    {
+      "description": "No wait for our own reusable workflows: a fix released there has to reach this repository at once",
+      "matchDepNames": ["this-is-tobi/github-workflows"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "The Helm chart follows the image this repository rebuilds every day, there is no version to track",
+      "matchPackageNames": ["ghcr.io/this-is-tobi/docs"],
+      "enabled": false
+    },
+    {
+      "description": "Lock file maintenance has no release timestamp for Renovate to age, so with minimumReleaseAge set its renovate/stability-days status stays pending forever. bun enforces the same age itself while it regenerates bun.lock (bunfig.toml), which is the check that actually protects the lock file",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "minimumReleaseAge": null
+    }
+  ]
+}

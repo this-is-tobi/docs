@@ -51,7 +51,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Cleanup old images
         run: |
@@ -65,6 +65,7 @@ jobs:
         with:
           save-config: false
           export-config: false
+          # renovate: datasource=github-releases depName=scaleway/scaleway-cli
           version: v2.30.0
           access-key: ${{ secrets.SCW_ACCESS_KEY }}
           secret-key: ${{ secrets.SCW_SECRET_KEY }}

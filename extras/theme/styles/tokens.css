@@ -164,6 +164,9 @@
   animation: tobi-beam 6s linear infinite paused;
 }
 
+/* A contribution card holds links that open in a new tab, and a click leaves the focus on
+   them. `:focus-within` would keep the card lit for as long as this tab stays open, so it
+   follows the keyboard focus only, as the cards that are links themselves do */
 .VPHomeFeatures .VPFeature.link:hover::before,
 .VPHomeFeatures .VPFeature.link:hover::after,
 .VPHomeFeatures .VPFeature.link:focus-visible::before,
@@ -174,8 +177,8 @@
 .about-card:focus-visible::after,
 .DocpressContributions .card:hover::before,
 .DocpressContributions .card:hover::after,
-.DocpressContributions .card:focus-within::before,
-.DocpressContributions .card:focus-within::after {
+.DocpressContributions .card:has(:focus-visible)::before,
+.DocpressContributions .card:has(:focus-visible)::after {
   opacity: 1;
 }
 
@@ -184,7 +187,7 @@
 .about-card:hover::after,
 .about-card:focus-visible::after,
 .DocpressContributions .card:hover::after,
-.DocpressContributions .card:focus-within::after {
+.DocpressContributions .card:has(:focus-visible)::after {
   animation-play-state: running;
 }
 

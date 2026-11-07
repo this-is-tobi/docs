@@ -2,6 +2,43 @@
  * Site pages: About, Contribute, Professional projects and Contributions.
  */
 
+/* Every site page sits in the frame of the home page and of the contributions page: 1152px
+   wide, the same padding at each width, the title at the same height. Moving from one page
+   to another, only the content changes */
+.site-page .VPDoc {
+  padding: 32px 24px 96px;
+}
+
+@media (min-width: 640px) {
+  .site-page .VPDoc {
+    padding: 48px 48px 128px;
+  }
+}
+
+@media (min-width: 960px) {
+  .site-page .VPDoc {
+    padding: 64px 64px 0;
+  }
+
+  /* The text keeps the left edge of the frame, the outline takes the right one */
+  .site-page .VPDoc:not(.has-sidebar) .container {
+    justify-content: space-between;
+    max-width: 1152px;
+  }
+
+  .site-page .VPDoc:not(.has-sidebar) .content {
+    max-width: none;
+    margin: 0;
+    padding: 0 0 128px;
+  }
+}
+
+/* The measure of the text, the one of the contributions page */
+.site-page .VPDoc:not(.has-sidebar) .content-container {
+  max-width: 720px;
+  margin: 0;
+}
+
 /* Titles set large and tight, the rest of the page left calm */
 .site-page .vp-doc h1,
 .DocpressContributions .vp-doc h1 {
@@ -154,17 +191,28 @@
   border-color: var(--tobi-line-hover);
 }
 
-/* About */
+/* About: the frame of the other pages, and the text on the left, as in the home page hero */
 .about {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 48px 24px 96px;
+  padding: 32px 24px 96px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .about {
-    padding: 96px 48px 128px;
+    padding: 48px 48px 128px;
   }
+}
+
+@media (min-width: 960px) {
+  .about {
+    padding: 64px 64px 128px;
+  }
+}
+
+.about-hero,
+.about-cards {
+  max-width: 1152px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .about-hero {
@@ -177,7 +225,8 @@
 
 @media (min-width: 768px) {
   .about-hero {
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     align-items: center;
     gap: 56px;
     text-align: left;
@@ -208,12 +257,13 @@
   color: var(--vp-c-text-2);
 }
 
+/* Set like the titles of the other pages */
 .about-name {
   margin: 0;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 800;
   line-height: 1.15;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   background: var(--tobi-ink);
   -webkit-background-clip: text;
   background-clip: text;
@@ -222,7 +272,7 @@
 
 @media (min-width: 768px) {
   .about-name {
-    font-size: 52px;
+    font-size: 48px;
   }
 }
 
@@ -247,7 +297,7 @@
 }
 
 .about-bio {
-  max-width: 640px;
+  max-width: 720px;
   margin: 16px 0 0;
   font-size: 16px;
   line-height: 1.75;

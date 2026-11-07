@@ -1,0 +1,97 @@
+/**
+ * Home page: the avatar hung like a framed print, and project cards lit by a beam of light
+ * (see tokens.css). Everything else stays the plain default theme.
+ */
+
+/* Hero */
+
+.VPHero .name {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 960px) {
+  .VPHero .name {
+    font-size: 64px;
+    line-height: 72px;
+  }
+}
+
+/* The avatar is hung like a framed print: a mat the colour of the page, then a hairline */
+.VPHero .image-src {
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px var(--tobi-line);
+}
+
+/* The default offset suits a transparent logo: a full avatar would run under the navigation */
+@media (min-width: 960px) {
+  .VPHero .image-container {
+    transform: none;
+  }
+
+  .VPHero .image-src,
+  .VPHero .image-bg {
+    max-width: 280px;
+    max-height: 280px;
+  }
+
+  .VPHero .image-bg {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Project cards */
+
+.VPHomeFeatures .VPFeature {
+  border: 1px solid var(--tobi-line);
+  border-radius: var(--tobi-radius-surface);
+  transition: border-color 0.25s;
+}
+
+.VPHomeFeatures .VPFeature.link:hover {
+  border-color: var(--tobi-line-hover);
+}
+
+.VPHomeFeatures .VPFeature .box {
+  position: relative;
+}
+
+.VPHomeFeatures .VPFeature .title {
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+/* On arrival, a band of light sweeps once across the hairlines of the cards. Its gradient
+   is pinned to the viewport while it runs, so the grid lights up as a single surface */
+.VPHomeFeatures .VPFeature.link .box::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--tobi-radius-surface);
+  background: linear-gradient(105deg, transparent 46%, var(--tobi-beam) 50%, transparent 54%) 0 0 / 200% 100% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  animation: tobi-sweep 1.8s ease-in-out 0.3s backwards;
+}
+
+@keyframes tobi-sweep {
+  from {
+    background-attachment: fixed;
+    background-position: 100% 0;
+    opacity: 1;
+  }
+
+  to {
+    background-attachment: fixed;
+    background-position: 0 0;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPHomeFeatures .VPFeature.link .box::after {
+    display: none;
+  }
+}

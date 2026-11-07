@@ -1,0 +1,305 @@
+/**
+ * Site pages: About, Contribute, Professional projects and Contributions.
+ */
+
+/* Titles set large and tight, the rest of the page left calm */
+.site-page .vp-doc h1,
+.DocpressContributions .vp-doc h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+@media (min-width: 768px) {
+  .site-page .vp-doc h1,
+  .DocpressContributions .vp-doc h1 {
+    font-size: 48px;
+  }
+}
+
+.site-page .vp-doc h2 {
+  letter-spacing: -0.02em;
+}
+
+.site-page .vp-doc h1 + p,
+.DocpressContributions .vp-doc h1 + p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+/* Cards shared by the grids of the site pages */
+.vp-doc .tech-grid ul,
+.vp-doc .rule-grid ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vp-doc .tech-grid li,
+.vp-doc .rule-grid li {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--tobi-line);
+  border-radius: var(--tobi-radius-surface);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc .tech-grid li > a:first-child {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.vp-doc .tech-grid li > a:first-child:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc .rule-grid li {
+  padding: 18px 20px;
+  font-size: 14px;
+}
+
+.vp-doc .rule-grid li strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: var(--vp-c-text-1);
+}
+
+/* Professional projects */
+.project-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -4px 0 20px;
+}
+
+.project-roles .VPBadge {
+  margin: 0;
+}
+
+.vp-doc a.project-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 12px;
+  border: 1px solid var(--tobi-line);
+  border-radius: var(--tobi-radius-control);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.vp-doc a.project-source::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: var(--tobi-github) center / contain no-repeat;
+  mask: var(--tobi-github) center / contain no-repeat;
+}
+
+.vp-doc a.project-source:hover {
+  border-color: var(--tobi-line-hover);
+}
+
+/* Contributions: the same hairlines and hover as the home page cards, without the lift */
+.DocpressContributions .card,
+.DocpressContributions .link::after {
+  border-radius: var(--tobi-radius-surface);
+}
+
+.DocpressContributions .card {
+  border-color: var(--tobi-line);
+}
+
+.DocpressContributions .card:hover {
+  transform: none;
+}
+
+.DocpressContributions .avatar,
+.DocpressContributions .badge {
+  border-radius: var(--tobi-radius-control);
+}
+
+.DocpressContributions .meta {
+  border-top-color: var(--tobi-line);
+}
+
+.DocpressContributions .card:hover {
+  border-color: var(--tobi-line-hover);
+  box-shadow: none;
+}
+
+/* The sort selector is drawn like the other controls: a hairline, nearly square corners */
+.DocpressContributions .select select {
+  border-color: var(--tobi-line);
+  border-radius: var(--tobi-radius-control);
+}
+
+.DocpressContributions .select select:hover {
+  border-color: var(--tobi-line-hover);
+}
+
+/* About */
+.about {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+@media (min-width: 768px) {
+  .about {
+    padding: 96px 48px 128px;
+  }
+}
+
+.about-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .about-hero {
+    flex-direction: row;
+    align-items: center;
+    gap: 56px;
+    text-align: left;
+  }
+}
+
+.about-avatar {
+  flex-shrink: 0;
+  width: 168px;
+  height: 168px;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px var(--tobi-line);
+}
+
+@media (min-width: 768px) {
+  .about-avatar {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.about-eyebrow {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+.about-name {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  background: var(--tobi-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .about-name {
+    font-size: 52px;
+  }
+}
+
+.about-role {
+  margin: 12px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--vp-c-text-1);
+}
+
+.about-role a {
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s;
+}
+
+.about-role a:hover {
+  text-decoration-color: var(--vp-c-brand-1);
+}
+
+.about-bio {
+  max-width: 640px;
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--vp-c-text-2);
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+@media (min-width: 768px) {
+  .about-actions {
+    justify-content: flex-start;
+  }
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 16px;
+  margin-top: 80px;
+}
+
+.about-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid var(--tobi-line);
+  border-radius: var(--tobi-radius-surface);
+  background-color: var(--vp-c-bg-soft);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.25s;
+}
+
+.about-card:hover {
+  border-color: var(--tobi-line-hover);
+}
+
+.about-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.about-card-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+}

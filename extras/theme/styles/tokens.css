@@ -1,0 +1,228 @@
+/**
+ * Palette: monochrome neutrals in the manner of Vercel's Geist, with GitHub's accent blue
+ * kept for links. The avatar artwork is the only colourful piece of the site.
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ *
+ * Text and links keep at least a 4.5:1 contrast on the page background in both themes.
+ */
+
+:root {
+  /* Ink of the large titles, fading from the text colour to the secondary one */
+  --tobi-ink: linear-gradient(180deg, #171717 30%, #5f5f5f);
+  /* Hairlines drawn around cards and controls */
+  --tobi-line: #eaeaea;
+  --tobi-line-hover: #c4c4c4;
+  /* Clickable cards: a faint light follows the pointer inside, a beam runs on the hairline */
+  --tobi-spotlight: rgba(0, 0, 0, 0.035);
+  --tobi-beam: #171717;
+  /* Two radii only: controls stay nearly square, surfaces barely soften */
+  --tobi-radius-control: 4px;
+  --tobi-radius-surface: 8px;
+  --tobi-github: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'/%3E%3C/svg%3E");
+
+  --vp-c-text-1: #171717;
+  --vp-c-text-2: #5f5f5f;
+  --vp-c-text-3: #8f8f8f;
+
+  --vp-c-brand-1: #0969da;
+  --vp-c-brand-2: #0550ae;
+  --vp-c-brand-3: #0969da;
+  --vp-c-brand-soft: rgba(9, 105, 218, 0.1);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #fafafa;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #fafafa;
+
+  --vp-c-divider: #eaeaea;
+  --vp-c-gutter: #eaeaea;
+
+  /* Primary buttons are ink on paper, inverted with the theme */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: #171717;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-bg: #383838;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-bg: #000000;
+
+  --vp-button-alt-border: var(--tobi-line);
+  --vp-button-alt-text: var(--vp-c-text-1);
+  --vp-button-alt-bg: transparent;
+  --vp-button-alt-hover-border: var(--tobi-line-hover);
+  --vp-button-alt-hover-text: var(--vp-c-text-1);
+  --vp-button-alt-hover-bg: var(--vp-c-bg-alt);
+  --vp-button-alt-active-border: var(--tobi-line-hover);
+  --vp-button-alt-active-text: var(--vp-c-text-1);
+  --vp-button-alt-active-bg: var(--vp-c-bg-soft);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: var(--tobi-ink);
+  --vp-home-hero-image-background-image: none;
+
+  --vp-sidebar-bg-color: var(--vp-c-bg-alt);
+}
+
+.dark {
+  --tobi-ink: linear-gradient(180deg, #ededed 30%, #8f8f8f);
+  --tobi-line: #262626;
+  --tobi-line-hover: #4a4a4a;
+  --tobi-spotlight: rgba(255, 255, 255, 0.055);
+  --tobi-beam: #ffffff;
+
+  --vp-c-text-1: #ededed;
+  --vp-c-text-2: #a1a1a1;
+  --vp-c-text-3: #7a7a7a;
+
+  --vp-c-brand-1: #4493f8;
+  --vp-c-brand-2: #79b8ff;
+  --vp-c-brand-3: #1f6feb;
+  --vp-c-brand-soft: rgba(56, 139, 253, 0.15);
+
+  --vp-c-bg: #0a0a0a;
+  --vp-c-bg-alt: #000000;
+  --vp-c-bg-elv: #111111;
+  --vp-c-bg-soft: #111111;
+
+  --vp-c-divider: #262626;
+  --vp-c-gutter: #000000;
+
+  --vp-button-brand-text: #0a0a0a;
+  --vp-button-brand-bg: #ededed;
+  --vp-button-brand-hover-text: #0a0a0a;
+  --vp-button-brand-hover-bg: #cccccc;
+  --vp-button-brand-active-text: #0a0a0a;
+  --vp-button-brand-active-bg: #ffffff;
+}
+
+::selection {
+  background-color: rgba(9, 105, 218, 0.2);
+}
+
+/* Clickable cards. A faint light follows the pointer inside them, placed by
+   scripts/spotlight.ts and centred without a pointer, while a beam of light runs along
+   their hairline as long as they are hovered or focused */
+@property --tobi-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.VPHomeFeatures .VPFeature.link,
+.about-card,
+.DocpressContributions .card {
+  position: relative;
+  isolation: isolate;
+}
+
+.VPHomeFeatures .VPFeature.link::before,
+.about-card::before,
+.DocpressContributions .card::before,
+.VPHomeFeatures .VPFeature.link::after,
+.about-card::after,
+.DocpressContributions .card::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.VPHomeFeatures .VPFeature.link::before,
+.about-card::before,
+.DocpressContributions .card::before {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--tobi-x, 50%) var(--tobi-y, 50%), var(--tobi-spotlight), transparent 70%);
+}
+
+/* Rings drawn on the 1px border: the hover beam, and the arrival sweep of the home page */
+.VPHomeFeatures .VPFeature.link::after,
+.about-card::after,
+.DocpressContributions .card::after,
+.VPHomeFeatures .VPFeature.link .box::after {
+  inset: -1px;
+  padding: 1px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* The beam: a comet whose head goes slowly round the ring while the card is hovered. It
+   rests where it stopped and carries on from there at the next hover. The angle gets a
+   base value instead of a fallback inside var(): with a fallback, Chromium keeps painting
+   the first angle and the comet stands still */
+.VPHomeFeatures .VPFeature.link::after,
+.about-card::after,
+.DocpressContributions .card::after {
+  --tobi-beam-angle: 0deg;
+  background: conic-gradient(from var(--tobi-beam-angle), transparent 60%, var(--tobi-beam) 96%, transparent);
+  animation: tobi-beam 6s linear infinite paused;
+}
+
+.VPHomeFeatures .VPFeature.link:hover::before,
+.VPHomeFeatures .VPFeature.link:hover::after,
+.VPHomeFeatures .VPFeature.link:focus-visible::before,
+.VPHomeFeatures .VPFeature.link:focus-visible::after,
+.about-card:hover::before,
+.about-card:hover::after,
+.about-card:focus-visible::before,
+.about-card:focus-visible::after,
+.DocpressContributions .card:hover::before,
+.DocpressContributions .card:hover::after,
+.DocpressContributions .card:focus-within::before,
+.DocpressContributions .card:focus-within::after {
+  opacity: 1;
+}
+
+.VPHomeFeatures .VPFeature.link:hover::after,
+.VPHomeFeatures .VPFeature.link:focus-visible::after,
+.about-card:hover::after,
+.about-card:focus-visible::after,
+.DocpressContributions .card:hover::after,
+.DocpressContributions .card:focus-within::after {
+  animation-play-state: running;
+}
+
+@keyframes tobi-beam {
+  to {
+    --tobi-beam-angle: 360deg;
+  }
+}
+
+/* Without motion, the brighter hairline of the hovered card is enough */
+@media (prefers-reduced-motion: reduce) {
+  .VPHomeFeatures .VPFeature.link::after,
+  .about-card::after,
+  .DocpressContributions .card::after {
+    display: none;
+  }
+}
+
+/* Round avatar in the navigation bar */
+.VPNavBarTitle .logo {
+  border-radius: 50%;
+}
+
+/* Controls: nearly square corners instead of the default pills. `:root` lifts these
+   rules above the scoped component styles they replace */
+:root .VPButton.medium,
+:root .VPButton.big {
+  border-radius: var(--tobi-radius-control);
+}
+
+:root .VPButton {
+  letter-spacing: 0.01em;
+}
+
+:root .VPBadge {
+  border-radius: var(--tobi-radius-control);
+}
+
+:root .DocSearch-Button {
+  border-radius: var(--tobi-radius-control);
+}

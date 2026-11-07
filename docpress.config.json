@@ -52,6 +52,8 @@
     "pg_dump",
     "pg_restore"
   ],
+  "contributions": true,
+  "contributionsFilter": ["!cloud-pi-native", "!dnum-mi", "!IA-Generative"],
   "hero": {
     "tagline": "Robots are everywhere",
     "image": { "src": "/avatar.jpg", "alt": "Tobi" },
@@ -99,6 +101,5 @@
         "copyright": "Copyright © 2020-present Thibault Colin"
       }
     }
-  },
-  "forks": true
+  }
 }

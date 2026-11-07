@@ -52,6 +52,14 @@
     "pg_dump",
     "pg_restore"
   ],
+  "hero": {
+    "tagline": "Robots are everywhere",
+    "image": { "src": "/avatar.jpg", "alt": "Tobi" },
+    "actions": [
+      { "theme": "brand", "text": "About me", "link": "/about" },
+      { "theme": "alt", "text": "Professional projects", "link": "/projects" }
+    ]
+  },
   "extraHeaderPages": ["./extras/pages"],
   "extraPublicContent": ["./extras/public"],
   "extraTheme": ["./extras/theme"],
@@ -62,36 +70,33 @@
     "vite": {
       "publicDir": "../public"
     },
-    "title": "Home",
-    "description": "Tobi's projects",
+    "title": "Tobi",
+    "description": "Open source projects, documentation and contributions by Tobi.",
     "lang": "en-US",
     "ignoreDeadLinks": "localhostLinks",
+    "head": [
+      ["link", { "rel": "icon", "type": "image/png", "sizes": "32x32", "href": "/favicon-32x32.png" }],
+      ["link", { "rel": "icon", "type": "image/png", "sizes": "16x16", "href": "/favicon-16x16.png" }],
+      ["link", { "rel": "apple-touch-icon", "sizes": "180x180", "href": "/apple-touch-icon.png" }],
+      ["link", { "rel": "manifest", "href": "/site.webmanifest" }],
+      ["meta", { "name": "theme-color", "media": "(prefers-color-scheme: light)", "content": "#ffffff" }],
+      ["meta", { "name": "theme-color", "media": "(prefers-color-scheme: dark)", "content": "#0a0a0a" }],
+      ["meta", { "property": "og:type", "content": "website" }],
+      ["meta", { "property": "og:site_name", "content": "Tobi" }],
+      ["meta", { "property": "og:image", "content": "https://this-is-tobi.com/avatar.jpg" }],
+      ["meta", { "name": "twitter:card", "content": "summary" }]
+    ],
     "themeConfig": {
+      "logo": { "src": "/logo.png", "alt": "" },
+      "nav": [{ "text": "Home", "link": "/" }],
       "socialLinks": [
-        { "icon": "github", "link": "https://github.com/this-is-tobi" }
+        { "icon": "github", "link": "https://github.com/this-is-tobi", "ariaLabel": "GitHub" },
+        { "icon": "bluesky", "link": "https://bsky.app/profile/this-is-tobi.com", "ariaLabel": "Bluesky" }
       ],
       "outline": [2, 3],
-      "search": {
-        "provider": "local",
-        "options": {
-          "translations": {
-            "button": {
-              "buttonText": "Search...",
-              "buttonAriaLabel": "Search"
-            },
-            "modal": {
-              "backButtonTitle": "erase search",
-              "displayDetails": "show details",
-              "noResultsText": "No results for : ",
-              "resetButtonTitle": "cancel search",
-              "footer": {
-                "selectText": "go to",
-                "navigateText": "navigate in results",
-                "closeText": "close"
-              }
-            }
-          }
-        }
+      "footer": {
+        "message": "Released under the MIT License.",
+        "copyright": "Copyright © 2020-present Thibault Colin"
       }
     }
   },

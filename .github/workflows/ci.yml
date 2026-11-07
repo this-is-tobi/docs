@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches:
+      - main
+    # The readme and the Helm chart are not part of the image
+    paths-ignore:
+      - README.md
+      - helm/**
+
+# A new push to the pull request replaces the check still running for the previous one
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  website:
+    name: Build and serve the website
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      # The production image, built for this runner only and kept local instead of pushed
+      - name: Build image
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: docker build --target prod --secret id=GITHUB_TOKEN,env=GITHUB_TOKEN --tag docs:ci .
+
+      - name: Start website
+        run: |
+          docker run --detach --name docs --publish 8080:8080 docs:ci
+          # Until nginx listens, the published port resets connections rather than refusing them
+          curl --silent --fail --retry 10 --retry-all-errors --retry-delay 1 --output /dev/null http://localhost:8080/healthz
+
+      - name: Check pages, redirects and 404
+        run: |
+          failed=0
+          # Compares the status and the redirect target a path answers with
+          check() {
+            local got
+            got=$(curl --silent --output /dev/null --write-out '%{http_code}|%header{location}' "http://localhost:8080$1")
+            if [[ "$got" == "$2" ]]; then
+              echo "$1 → $got"
+            else
+              echo "::error::$1 answered '$got' instead of '$2'"
+              failed=1
+            fi
+          }
+          check / '200|'
+          check /about '200|'
+          check /contribute '200|'
+          check /projects '200|'
+          check /contributions '200|'
+          check /healthz '200|'
+          check /pro.-projects '301|/projects'
+          check /forks.html '301|/contributions'
+          check /does-not-exist '404|'
+          if ! curl --silent http://localhost:8080/does-not-exist | grep --quiet '<title>404 | Tobi</title>'; then
+            echo "::error::Unknown pages do not get the 404 page of the website"
+            failed=1
+          fi
+          exit "$failed"
+
+      - name: Show website logs
+        if: ${{ failure() }}
+        run: docker logs docs

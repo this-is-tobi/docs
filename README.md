@@ -11,6 +11,8 @@ The build and deploy [workflow](./.github/workflows/sync.yml) runs on each push 
 
 In addition, after each workflow run, images older than 30 days will be deleted and the newly created container will be deployed.
 
+Pull requests run the [CI workflow](./.github/workflows/ci.yml) instead: it builds the production image without pushing it, serves it, and checks that the pages answer, that the renamed pages redirect and that unknown pages get the 404 page.
+
 ## Prerequisites
 
 To run the application in development mode, install :

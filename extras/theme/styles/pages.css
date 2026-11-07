@@ -20,13 +20,14 @@
     padding: 64px 64px 0;
   }
 
-  /* The text keeps the left edge of the frame, the outline takes the right one */
-  .site-page .VPDoc:not(.has-sidebar) .container {
+  /* The text keeps the left edge of the frame, the outline takes the right one. Child
+     combinators keep these rules off the outline, whose own box is also a `.content` */
+  .site-page .VPDoc:not(.has-sidebar) > .container {
     justify-content: space-between;
     max-width: 1152px;
   }
 
-  .site-page .VPDoc:not(.has-sidebar) .content {
+  .site-page .VPDoc:not(.has-sidebar) > .container > .content {
     max-width: none;
     margin: 0;
     padding: 0 0 128px;
@@ -34,7 +35,7 @@
 }
 
 /* The measure of the text, the one of the contributions page */
-.site-page .VPDoc:not(.has-sidebar) .content-container {
+.site-page .VPDoc:not(.has-sidebar) > .container > .content > .content-container {
   max-width: 720px;
   margin: 0;
 }

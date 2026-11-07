@@ -16,28 +16,40 @@
 }
 
 @media (min-width: 960px) {
+  /* The text keeps the left edge of the frame, the outline takes the right edge of the
+     documentation pages: 32px from the side of the window, and held within the 1440px
+     layout of Vitepress on wider screens */
   .site-page .VPDoc {
-    padding: 64px 64px 0;
+    padding: 64px max(32px, calc((100% - 1440px) / 2 + 32px)) 0 max(64px, calc((100% - 1152px) / 2));
   }
 
-  /* The text keeps the left edge of the frame, the outline takes the right one. Child
-     combinators keep these rules off the outline, whose own box is also a `.content` */
+  /* Child combinators keep these rules off the outline, whose own box is also a `.content` */
   .site-page .VPDoc:not(.has-sidebar) > .container {
     justify-content: space-between;
-    max-width: 1152px;
+    max-width: none;
+    margin: 0;
   }
 
+  /* The 32px on the right keep the text 64px from the outline when the screen is narrow,
+     as on the documentation pages */
   .site-page .VPDoc:not(.has-sidebar) > .container > .content {
     max-width: none;
     margin: 0;
-    padding: 0 0 128px;
+    padding: 0 32px 128px 0;
   }
 }
 
-/* The measure of the text, the one of the contributions page */
+/* The measure of the text on narrow screens, the one of the contributions page */
 .site-page .VPDoc:not(.has-sidebar) > .container > .content > .content-container {
   max-width: 720px;
   margin: 0;
+}
+
+/* From the width of the documentation pages without their sidebar */
+@media (min-width: 960px) {
+  .site-page .VPDoc:not(.has-sidebar) > .container > .content > .content-container {
+    max-width: 960px;
+  }
 }
 
 /* Titles set large and tight, the rest of the page left calm */
@@ -76,6 +88,12 @@
   margin: 16px 0;
   padding: 0;
   list-style: none;
+}
+
+/* The few rules share the whole row, where the stacks keep their columns from one grid to
+   the next */
+.vp-doc .rule-grid ul {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
 }
 
 .vp-doc .tech-grid li,

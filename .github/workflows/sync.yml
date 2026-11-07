@@ -61,7 +61,7 @@ jobs:
             -u "this-is-tobi"
 
       - name: Deploy docs
-        uses: scaleway/action-scw@be2696f261325a78354eda14988c80405f33e082
+        uses: scaleway/action-scw@2e34a1eb35cf3cac627f24643a101fea269cbd83 # v0.0.3
         with:
           save-config: false
           export-config: false

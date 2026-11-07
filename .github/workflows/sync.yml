@@ -2,8 +2,23 @@ name: Build new aggregated documentation
 
 on:
   workflow_dispatch:
+  # Picks up the documentation changes of the aggregated repositories
   schedule:
     - cron: '0 1 * * *'
+  # Ships a merged pull request right away, rather than with the next nightly build. The
+  # readme and the Helm chart are not part of the image
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+      - helm/**
+
+# One build and deploy at a time: a newer run waits for the current one rather than racing
+# it to the container or cancelling it halfway through a deploy
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   build:

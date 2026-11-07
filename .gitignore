@@ -195,3 +195,6 @@ dist/
 
 # docpress
 docpress
+
+# mise, when its lockfile setting is on
+mise.lock

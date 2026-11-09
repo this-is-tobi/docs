@@ -74,6 +74,11 @@
       "description": "Lock file maintenance has no release timestamp for Renovate to age, so with minimumReleaseAge set its renovate/stability-days status stays pending forever. bun enforces the same age itself while it regenerates bun.lock (bunfig.toml), which is the check that actually protects the lock file",
       "matchUpdateTypes": ["lockFileMaintenance"],
       "minimumReleaseAge": null
+    },
+    {
+      "description": "Digest pins and updates have no release timestamp for Renovate to age, so with minimumReleaseAge set their renovate/stability-days status stays pending forever. They add no new version to wait for either, the tag in use stays the same",
+      "matchUpdateTypes": ["pin", "pinDigest", "digest"],
+      "minimumReleaseAge": null
     }
   ]
 }

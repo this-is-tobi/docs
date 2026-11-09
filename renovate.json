@@ -79,6 +79,13 @@
       "description": "Digest pins and updates have no release timestamp for Renovate to age, so with minimumReleaseAge set their renovate/stability-days status stays pending forever. They add no new version to wait for either, the tag in use stays the same",
       "matchUpdateTypes": ["pin", "pinDigest", "digest"],
       "minimumReleaseAge": null
+    },
+    {
+      "description": "The Scaleway CLI has removed a subcommand in a minor release (deploy became redeploy in v2.65), and the deploy job is the only place that runs it, pull requests do not. A minor or major gets a PR of its own, approved from the dependency dashboard once the deploy command has been checked against the new version",
+      "matchDepNames": ["scaleway/scaleway-cli"],
+      "matchUpdateTypes": ["minor", "major"],
+      "groupName": "scaleway-cli",
+      "dependencyDashboardApproval": true
     }
   ]
 }

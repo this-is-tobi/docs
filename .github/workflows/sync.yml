@@ -23,7 +23,7 @@ concurrency:
 jobs:
   build:
     name: Build and publish
-    uses: this-is-tobi/github-workflows/.github/workflows/build-docker.yml@v0
+    uses: this-is-tobi/github-workflows/.github/workflows/build-docker.yml@9771f8416063599c403c527c84a03b2731c2f701 # v0
     permissions:
       contents: read
       packages: write

@@ -71,4 +71,4 @@ jobs:
           secret-key: ${{ secrets.SCW_SECRET_KEY }}
           default-project-id: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
           default-organization-id: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
-          args: container container deploy ${{ secrets.SCW_CONTAINER_ID }}
+          args: container container redeploy ${{ secrets.SCW_CONTAINER_ID }}

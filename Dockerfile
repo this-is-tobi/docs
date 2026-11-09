@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=GITHUB_TOKEN \
     bun run build:docs -T "$(cat /run/secrets/GITHUB_TOKEN)"
 
 # Prod stage
-FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine AS prod
+FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine@sha256:b5047b9b76845eac124358373c6852377c52e4b05834a47647e955dd91cb8f1e AS prod
 
 USER 0
 COPY --from=build --chown=1001:0 --chmod=770 /app/docpress/.vitepress/dist /usr/share/nginx/html/

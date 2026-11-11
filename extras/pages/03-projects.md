@@ -42,7 +42,7 @@ MIrAI is an AI platform developed by the French government to make it easier to 
 <div class="tech-grid">
 
 - [CloudNativePG](https://cloudnative-pg.io/) Kubernetes operator running highly available PostgreSQL clusters.
-- [Knative](https://knative.dev/) Platform to build, deploy and manage serverless workloads.
+- [Keda](https://keda.sh/) Kubernetes-based Event Driven Autoscaling.
 - [KServe](https://kserve.github.io/) Standardized platform for generative and predictive AI inference.
 - [LiteLLM](https://www.litellm.ai/) AI gateway calling 100+ LLM APIs in the OpenAI format, with cost tracking, guardrails and load balancing.
 - [NVIDIA GPU Operator](https://github.com/NVIDIA/gpu-operator) Manages GPU drivers and software in Kubernetes clusters.
